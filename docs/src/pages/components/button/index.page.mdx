@@ -7,5 +7,14 @@ reactSource: packages/react/src/primitives/Button/Button.tsx
 ---
 
 import { Fragment } from '@/components/Fragment';
+import { Alert, Tabs, TabItem } from '@aws-amplify/ui-react';
 
+<Tabs>
+<TabItem title="Usage">
 <Fragment>{({ platform }) => import(`./${platform}.mdx`)}</Fragment>
+
+</TabItem>
+<TabItem title="API">
+<Fragment>{({ platform }) => import(`./props.${platform}.md`)}</Fragment>
+</TabItem>
+</Tabs>
