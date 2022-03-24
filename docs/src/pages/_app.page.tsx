@@ -9,6 +9,10 @@ import { configure, trackPageVisit } from '../utils/track';
 import { theme } from '../theme';
 import '../styles/index.scss';
 
+import { DocSearch } from '@docsearch/react';
+
+import '@docsearch/css';
+
 // suppress useLayoutEffect warnings when running outside a browser
 // See: https://gist.github.com/gaearon/e7d97cdf38a2907924ea12e4ebdf3c85#gistcomment-3886909
 // @ts-ignore Cannot assign to 'useLayoutEffect' because it is a read-only property.ts(2540)
@@ -41,6 +45,11 @@ function MyApp({ Component, pageProps }) {
           platform={platform}
           colorMode={colorMode}
           setColorMode={setColorMode}
+        />
+        <DocSearch
+          appId="R2IYF7ETH7"
+          apiKey="599cec31baffa4868cae4e79f180729b"
+          indexName="docsearch"
         />
         <Component
           {...pageProps}
