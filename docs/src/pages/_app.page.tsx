@@ -10,8 +10,6 @@ import { theme } from '../theme';
 import { META_INFO } from '@/data/meta';
 import '../styles/index.scss';
 
-import { DocSearch } from '@docsearch/react';
-
 import '@docsearch/css';
 
 // suppress useLayoutEffect warnings when running outside a browser
@@ -59,11 +57,6 @@ function MyApp({ Component, pageProps }) {
           platform={platform}
           colorMode={colorMode}
           setColorMode={setColorMode}
-        />
-        <DocSearch
-          appId="VWBXXCSMEN"
-          apiKey="a9a0e0bf1d18ac636881324e877bd471"
-          indexName="amplify-dev-ui"
         />
         <Component
           {...pageProps}

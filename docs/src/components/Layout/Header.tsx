@@ -20,6 +20,7 @@ import {
   MdOpenInNew,
 } from 'react-icons/md';
 import { useRouter } from 'next/router';
+import { DocSearch } from '@docsearch/react';
 import { Logo } from '@/components/Logo';
 import { FrameworkChooser } from './FrameworkChooser';
 import { SecondaryNav } from './SecondaryNav';
@@ -132,6 +133,11 @@ export const Header = ({ platform, colorMode, setColorMode }) => {
         </NavLink>
 
         <Nav />
+        <DocSearch
+          appId="VWBXXCSMEN"
+          apiKey="a9a0e0bf1d18ac636881324e877bd471"
+          indexName="amplify-dev-ui"
+        />
 
         <Settings
           colorMode={colorMode}
