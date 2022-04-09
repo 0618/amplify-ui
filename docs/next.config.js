@@ -44,6 +44,14 @@ module.exports = withNextPluginPreval({
             key: 'X-Content-Type-Options',
             value: 'nosniff',
           },
+          {
+            key: 'X-Algolia-Application-Id',
+            value: 'VWBXXCSMEN',
+          },
+          {
+            key: 'X-Algolia-API-Key',
+            value: 'a9a0e0bf1d18ac636881324e877bd471',
+          },
           // for 'Content-Security-Policy', see _document.page.tsx
         ],
       },

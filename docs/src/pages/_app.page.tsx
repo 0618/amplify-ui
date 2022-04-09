@@ -61,9 +61,9 @@ function MyApp({ Component, pageProps }) {
           setColorMode={setColorMode}
         />
         <DocSearch
-          appId="R2IYF7ETH7"
-          apiKey="599cec31baffa4868cae4e79f180729b"
-          indexName="docsearch"
+          appId="VWBXXCSMEN"
+          apiKey="a9a0e0bf1d18ac636881324e877bd471"
+          indexName="amplify-dev-ui"
         />
         <Component
           {...pageProps}

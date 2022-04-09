@@ -4,18 +4,22 @@
 applications:
   - appRoot: docs
     customHeaders:
-      - pattern: "**/*"
+      - pattern: '**/*'
         headers:
-          - key: "Strict-Transport-Security"
-            value: "max-age=31536000; includeSubDomains"
-          - key: "X-Frame-Options"
-            value: "SAMEORIGIN"
-          - key: "X-XSS-Protection"
-            value: "1; mode=block"
-          - key: "X-Content-Type-Options"
-            value: "nosniff"
+          - key: 'Strict-Transport-Security'
+            value: 'max-age=31536000; includeSubDomains'
+          - key: 'X-Frame-Options'
+            value: 'SAMEORIGIN'
+          - key: 'X-XSS-Protection'
+            value: '1; mode=block'
+          - key: 'X-Content-Type-Options'
+            value: 'nosniff'
           # CSP set in _document.page.tsx meta tag
-      - pattern: "flutter/**/*"
+          - key: 'X-Algolia-Application-Id'
+            value: 'VWBXXCSMEN'
+          - key: 'X-Algolia-API-Key'
+            value: 'a9a0e0bf1d18ac636881324e877bd471'
+      - pattern: 'flutter/**/*'
         headers:
-          - key: "Cache-Control"
-            value: "public, max-age=300"
+          - key: 'Cache-Control'
+            value: 'public, max-age=300'
