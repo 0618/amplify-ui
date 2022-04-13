@@ -2,7 +2,7 @@ import { Expander, ExpanderItem } from '@aws-amplify/ui-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-## View Props
+## Props
 
 <Expander type="multiple" defaultValue={['ViewProps']}>
   
@@ -19,26 +19,13 @@ import remarkGfm from 'remark-gfm';
 
   </ExpanderItem>
 
-<ExpanderItem title="BaseComponentProps" value="BaseComponentProps">
+<ExpanderItem title="Attributes" value="Attributes">
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       children={`
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
-| - | - | - | - |
-
-      `}
-    />
-
-  </ExpanderItem>
-
-<ExpanderItem title="BaseStyleProps" value="BaseStyleProps">
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      children={`
-| name | type | default | description |
-| ---- | ---- | ------- | ----------- |
-| - | - | - | - |
+| key | Key | - |  |
 
       `}
     />

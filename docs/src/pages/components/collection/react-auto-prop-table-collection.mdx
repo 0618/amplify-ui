@@ -2,7 +2,7 @@ import { Expander, ExpanderItem } from '@aws-amplify/ui-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-## Collection Props
+## Props
 
 <Expander type="multiple" defaultValue={['CollectionProps']}>
   
@@ -13,6 +13,21 @@ import remarkGfm from 'remark-gfm';
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
 | - | - | - | - |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="AriaProps" value="AriaProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| ariaLabel | string | - |  |
+| ariaValuetext | string | - |  |
+| role | React.AriaRole | - |  |
 
       `}
     />
@@ -97,13 +112,134 @@ import remarkGfm from 'remark-gfm';
 
   </ExpanderItem>
 
-<ExpanderItem title="RefAttributes" value="RefAttributes">
+<ExpanderItem title="CSSLayoutStyleProps" value="CSSLayoutStyleProps">
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       children={`
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
-| - | - | - | - |
+| alignItems | ResponsiveStyle&#60;AlignItems&#62; | - | Controls where the Flex/Grid items sit on the cross axis. |
+| alignContent | ResponsiveStyle&#60;AlignContent&#62; | - | Sets the distribution of space between and around content items |
+| justifyContent | ResponsiveStyle&#60;JustifyContent&#62; | - | Controls where the Flex/Grid items sit on the main axis. |
+| gap | ResponsiveStyle&#60;StyleToken&#60;Gap&#60;0 &#124; (string & \{\})&#62;&#62;&#62; | - | Spacing between child components. Shorthand for rowGap and columnGap. |
+| columnGap | ResponsiveStyle&#60;StyleToken&#60;GridColumnGap&#60;0 &#124; (string & \{\})&#62;&#62;&#62; | - | Spacing between Flex/Grid child columns |
+| rowGap | ResponsiveStyle&#60;StyleToken&#60;RowGap&#60;0 &#124; (string & \{\})&#62;&#62;&#62; | - | Spacing between Flex/Grid child rows |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="CollectionBaseProps" value="CollectionBaseProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| items | Item[] | - |  |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="CollectionWrapperProps" value="CollectionWrapperProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| type | "list" &#124; "grid" | list | Collection type. This will be used to determine collection wrapper component. |
+| isPaginated | boolean | - | Enable pagination for collection items |
+| itemsPerPage | number | 10 | Page size (when pagination is enabled) |
+| isSearchable | boolean | - | Enable collection filtering |
+| searchFilter | (item: unknown, searchText: string) =&#62; boolean | (item: unknown, text: string): boolean =&#62; {   if (strHasLength(item)) {     return item.toLowerCase().includes(text.toLowerCase());   }    if (typeof item === 'object' && item !== null) {     return Object.values(item).some((subItem) =&#62; itemHasText(subItem, text));   }    return false; } | Custom search filter (when search is enabled) |
+| searchPlaceholder | string | - | Search field placeholder |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="FlexContainerStyleProps" value="FlexContainerStyleProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| direction | ResponsiveStyle&#60;FlexDirection&#62; | column | Sets how flex items are placed in the flex container defining the main axis and the direction (normal or reversed). (maps to flex-direction CSS property) |
+| wrap | ResponsiveStyle&#60;FlexWrap&#62; | - | The flexWrap property is set on containers and it controls what happens when children overflow the size of the container along the main axis. By default, children are forced into a single line (which can shrink elements). If wrapping is allowed, items are wrapped into multiple lines along the main axis if needed. (maps to flex-wrap CSS property) |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="FlexItemStyleProps" value="FlexItemStyleProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| flex | ResponsiveStyle&#60;Flex&#60;0 &#124; (string & \{\})&#62;&#62; | - | Shorthand for flex grow / shrink / basis |
+| order | ResponsiveStyle&#60;Order&#62; | - | Controls order flex items appear |
+| grow | ResponsiveStyle&#60;FlexGrow&#62; | - | Ability for flex item to grow |
+| shrink | ResponsiveStyle&#60;FlexShrink&#62; | - | Ability for flex item to shrink |
+| basis | ResponsiveStyle&#60;FlexBasis&#60;0 &#124; (string & \{\})&#62;&#62; | - | Default size of element before remaining space is distributed |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="GridContainerStyleProps" value="GridContainerStyleProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| autoColumns | ResponsiveStyle&#60;GridAutoColumns&#60;0 &#124; (string & \{\})&#62;&#62; | - |  |
+| autoFlow | ResponsiveStyle&#60;GridAutoFlow&#62; | - |  |
+| autoRows | ResponsiveStyle&#60;GridAutoRows&#60;0 &#124; (string & \{\})&#62;&#62; | - |  |
+| templateAreas | ResponsiveStyle&#60;GridTemplateAreas&#62; | - |  |
+| templateColumns | ResponsiveStyle&#60;GridTemplateColumns&#60;0 &#124; (string & \{\})&#62;&#62; | - |  |
+| templateRows | ResponsiveStyle&#60;GridTemplateRows&#60;0 &#124; (string & \{\})&#62;&#62; | - |  |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="GridItemStyleProps" value="GridItemStyleProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| area | ResponsiveStyle&#60;GridArea&#62; | - |  |
+| column | ResponsiveStyle&#60;GridColumn&#62; | - |  |
+| columnEnd | ResponsiveStyle&#60;GridColumnEnd&#62; | - |  |
+| columnSpan | ResponsiveStyle&#60;GridSpanType&#62; | - |  |
+| columnStart | ResponsiveStyle&#60;GridColumnStart&#62; | - |  |
+| row | ResponsiveStyle&#60;GridRow&#62; | - |  |
+| rowEnd | ResponsiveStyle&#60;GridRowEnd&#62; | - |  |
+| rowSpan | ResponsiveStyle&#60;GridSpanType&#62; | - |  |
+| rowStart | ResponsiveStyle&#60;GridRowStart&#62; | - |  |
+
+      `}
+    />
+
+  </ExpanderItem>
+
+<ExpanderItem title="ViewProps" value="ViewProps">
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      children={`
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| as | ElementType | - |  |
+| isDisabled | boolean | - |  |
+| style | CSSProperties | - |  |
 
       `}
     />

@@ -136,7 +136,23 @@ for await (const filePath of globbyStream(
   if (!existsSync(targetPath)) continue;
   if (!props || !displayName) continue;
 
-  const wantedCategories = getWantedCategories(displayName);
+  const wantedCategories = Object.keys(
+    Object.values(props).reduce((acc, curr) => {
+      const category = curr.declarations
+        ? curr.declarations[0].name
+        : undefined;
+      return {
+        ...acc,
+        ...(category &&
+          ![`${displayName}Props`, 'TypeLiteral'].includes(category) && {
+            [category]: [category],
+          }),
+      };
+    }, {})
+  ).sort();
+
+  wantedCategories.unshift(`${displayName}Props`);
+
   const categorizedProps = categorizeProps(props, wantedCategories);
   const propsTables = createPropsTableExpander(
     categorizedProps,
