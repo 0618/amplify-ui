@@ -1,30 +1,34 @@
 import * as React from 'react';
-import NextLink from 'next/link';
+
 import {
   Button,
-  VisuallyHidden,
-  Link,
-  Flex,
   ColorMode,
+  Divider,
+  Flex,
+  Link,
   ToggleButton,
   ToggleButtonGroup,
-  Divider,
   View,
+  VisuallyHidden,
 } from '@aws-amplify/ui-react';
+import { Hits, InstantSearch, SearchBox } from 'react-instantsearch-dom';
 import {
+  MdBedtime,
   MdClose,
   MdMenu,
-  MdWbSunny,
-  MdBedtime,
-  MdTonality,
   MdOpenInNew,
+  MdTonality,
+  MdWbSunny,
 } from 'react-icons/md';
-import { useRouter } from 'next/router';
+
 import { DocSearch } from '@docsearch/react';
-import { Logo } from '@/components/Logo';
 import { FrameworkChooser } from './FrameworkChooser';
-import { SecondaryNav } from './SecondaryNav';
 import LinkButton from './LinkButton';
+import { Logo } from '@/components/Logo';
+import NextLink from 'next/link';
+import { SecondaryNav } from './SecondaryNav';
+import algoliasearch from 'algoliasearch/lite';
+import { useRouter } from 'next/router';
 
 const NavLink = ({
   href,
@@ -110,6 +114,20 @@ const ColorModeSwitcher = ({ colorMode, setColorMode }) => {
 
 export const Header = ({ platform, colorMode, setColorMode }) => {
   const [expanded, setExpanded] = React.useState(false);
+  const [query, setQuery] = React.useState('');
+  const [hits, setHits] = React.useState([]);
+
+  const searchClient = algoliasearch(
+    'VWBXXCSMEN',
+    'a9a0e0bf1d18ac636881324e877bd471'
+  );
+  const index = searchClient.initIndex('amplify-dev-ui');
+  console.log('Nice');
+  console.log(index);
+  React.useEffect(() => {
+    index.search(query).then((data) => console.log(data));
+  }, [query]);
+
   return (
     <>
       <header className={`docs-header ${expanded ? 'expanded' : ''}`}>
@@ -138,7 +156,10 @@ export const Header = ({ platform, colorMode, setColorMode }) => {
           apiKey="a9a0e0bf1d18ac636881324e877bd471"
           indexName="amplify-dev-ui"
         />
-
+        <InstantSearch indexName="amplify-dev-ui" searchClient={searchClient}>
+          <SearchBox />
+          <Hits />
+        </InstantSearch>
         <Settings
           colorMode={colorMode}
           setColorMode={setColorMode}
