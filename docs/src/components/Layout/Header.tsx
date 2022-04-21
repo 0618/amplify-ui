@@ -5,6 +5,7 @@ import {
   ColorMode,
   Divider,
   Flex,
+  IconSearch,
   Link,
   ToggleButton,
   ToggleButtonGroup,
@@ -81,6 +82,11 @@ const Nav = (props) => (
 
 const Settings = ({ platform, setColorMode, colorMode }) => (
   <Flex className="docs-settings" justifyContent="center" alignItems="center">
+    <DocSearch
+      appId="VWBXXCSMEN"
+      apiKey="a9a0e0bf1d18ac636881324e877bd471"
+      indexName="amplify-dev-ui"
+    />
     <FrameworkChooser platform={platform} />
     <ColorModeSwitcher setColorMode={setColorMode} colorMode={colorMode} />
   </Flex>
@@ -151,15 +157,6 @@ export const Header = ({ platform, colorMode, setColorMode }) => {
         </NavLink>
 
         <Nav />
-        <DocSearch
-          appId="VWBXXCSMEN"
-          apiKey="a9a0e0bf1d18ac636881324e877bd471"
-          indexName="amplify-dev-ui"
-        />
-        <InstantSearch indexName="amplify-dev-ui" searchClient={searchClient}>
-          <SearchBox />
-          <Hits />
-        </InstantSearch>
         <Settings
           colorMode={colorMode}
           setColorMode={setColorMode}
