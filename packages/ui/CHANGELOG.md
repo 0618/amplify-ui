@@ -1,5 +1,25 @@
 # @aws-amplify/ui
 
+## 3.6.4
+
+### Patch Changes
+
+- [#1667](https://github.com/aws-amplify/amplify-ui/pull/1667) [`1601b3f94`](https://github.com/aws-amplify/amplify-ui/commit/1601b3f94d68acd1df0e592c6328f19b29620447) Thanks [@hbuchel](https://github.com/hbuchel)! - fix: update focus styling/token nesting for switchField
+
+## 3.6.3
+
+### Patch Changes
+
+- [#1673](https://github.com/aws-amplify/amplify-ui/pull/1673) [`34a19a541`](https://github.com/aws-amplify/amplify-ui/commit/34a19a541b4b733a6688a38a435423e9c607e918) Thanks [@reesscot](https://github.com/reesscot)! - Type theme component design tokens
+
+* [#1679](https://github.com/aws-amplify/amplify-ui/pull/1679) [`16dced7de`](https://github.com/aws-amplify/amplify-ui/commit/16dced7de5edc73c064b7ec4bddbefe586e98393) Thanks [@wlee221](https://github.com/wlee221)! - fix(authenticator): Ensure machine setup runs after user signs in, refreshes, then signs out.
+
+## 3.6.2
+
+### Patch Changes
+
+- [#1652](https://github.com/aws-amplify/amplify-ui/pull/1652) [`b9a181bc9`](https://github.com/aws-amplify/amplify-ui/commit/b9a181bc9da2411017877a91dc931812e8371bb8) Thanks [@dbanksdesign](https://github.com/dbanksdesign)! - Fixing shadow and outline CSS variables in the default styles.
+
 ## 3.6.1
 
 ### Patch Changes

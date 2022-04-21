@@ -73,6 +73,9 @@ const Nav = (props) => (
     <NavLink {...props} href="/theming">
       Theming
     </NavLink>
+    <NavLink {...props} href="/guides">
+      Guides
+    </NavLink>
     <Divider orientation="vertical" />
     <NavLink {...props} isExternal href="https://docs.amplify.aws">
       Amplify docs <MdOpenInNew />

@@ -1,5 +1,54 @@
 # @aws-amplify/ui-react
 
+## 2.15.4
+
+### Patch Changes
+
+- [#1724](https://github.com/aws-amplify/amplify-ui/pull/1724) [`1481e5e04`](https://github.com/aws-amplify/amplify-ui/commit/1481e5e0419f9c13ad48cc8c0d00066acb3c7d92) Thanks [@calebpollman](https://github.com/calebpollman)! - chore(ui-react): type withAuthenticator
+
+* [#1685](https://github.com/aws-amplify/amplify-ui/pull/1685) [`c984491dc`](https://github.com/aws-amplify/amplify-ui/commit/c984491dcf84171f7e69942ff49e4bccae0c6735) Thanks [@wlee221](https://github.com/wlee221)! - Adjusts Authenticator to accept ReactNode as well as render prop children
+
+- [#1722](https://github.com/aws-amplify/amplify-ui/pull/1722) [`d714ff3ed`](https://github.com/aws-amplify/amplify-ui/commit/d714ff3ed5bc31563ff1ff799bc4bcc9c2743166) Thanks [@ErikCH](https://github.com/ErikCH)! - Updated maplibre-gl to latest version
+
+* [#1721](https://github.com/aws-amplify/amplify-ui/pull/1721) [`13ae3c03c`](https://github.com/aws-amplify/amplify-ui/commit/13ae3c03c3b07ff4b0ccc2dd842f682b42c55fb7) Thanks [@slaymance](https://github.com/slaymance)! - Bump maplibre-gl-js-amplify dependency version
+
+* Updated dependencies [[`1601b3f94`](https://github.com/aws-amplify/amplify-ui/commit/1601b3f94d68acd1df0e592c6328f19b29620447)]:
+  - @aws-amplify/ui@3.6.4
+
+## 2.15.3
+
+### Patch Changes
+
+- [#1681](https://github.com/aws-amplify/amplify-ui/pull/1681) [`7beda1ea2`](https://github.com/aws-amplify/amplify-ui/commit/7beda1ea2e28f5de4beefa50f2032cef3e4870e1) Thanks [@jacoblogan](https://github.com/jacoblogan)! - Remove hygen
+
+* [#1666](https://github.com/aws-amplify/amplify-ui/pull/1666) [`ef5a70817`](https://github.com/aws-amplify/amplify-ui/commit/ef5a708170ff2b177e79a5e2d8c6ea2645ee453a) Thanks [@calebpollman](https://github.com/calebpollman)! - chore(ui-react): updates to allow eslint react-hooks/rules-of-hooks set to error
+  - update eslint 'rules-of-hooks/exhaustive-deps' from 'warning' to 'error'
+  - turn linting on for entire ui-react package
+  - add missing or update dep arrays as needed to satisfy 'rules-of-hooks/exhaustive-deps'
+  - add DefaultFooter component in SignIn
+  - add DefaultHeader component in ConfirmSignUp
+  - add DefaultComponents interface and remove PartialDeep and related files
+  - add useAuthenticatorService and error throw in useAuthenticator to prevent conditional hook calls
+* Updated dependencies [[`34a19a541`](https://github.com/aws-amplify/amplify-ui/commit/34a19a541b4b733a6688a38a435423e9c607e918), [`16dced7de`](https://github.com/aws-amplify/amplify-ui/commit/16dced7de5edc73c064b7ec4bddbefe586e98393)]:
+  - @aws-amplify/ui@3.6.3
+
+## 2.15.2
+
+### Patch Changes
+
+- [#1652](https://github.com/aws-amplify/amplify-ui/pull/1652) [`b9a181bc9`](https://github.com/aws-amplify/amplify-ui/commit/b9a181bc9da2411017877a91dc931812e8371bb8) Thanks [@dbanksdesign](https://github.com/dbanksdesign)! - Fixing shadow and outline CSS variables in the default styles.
+
+* [#1657](https://github.com/aws-amplify/amplify-ui/pull/1657) [`65ad18e49`](https://github.com/aws-amplify/amplify-ui/commit/65ad18e4980aa7973c28eda333b967eb4aac42dd) Thanks [@wlee221](https://github.com/wlee221)! - chore: Add error message when `useAuthenticator` can't find a parent `Authenticator.Provider`.
+
+- [#1655](https://github.com/aws-amplify/amplify-ui/pull/1655) [`5379686e6`](https://github.com/aws-amplify/amplify-ui/commit/5379686e643e02f35c3aa3b3a26af41d01c5b463) Thanks [@hbuchel](https://github.com/hbuchel)! - fix: accessibly hide label text for CheckboxField when labelHidden is…
+
+* [#1638](https://github.com/aws-amplify/amplify-ui/pull/1638) [`4b146599d`](https://github.com/aws-amplify/amplify-ui/commit/4b146599d49279bda93076f62e33debef5a70edd) Thanks [@zchenwei](https://github.com/zchenwei)! - chore: updating import paths to reduce circular dependencies
+
+- [#1654](https://github.com/aws-amplify/amplify-ui/pull/1654) [`b940de62a`](https://github.com/aws-amplify/amplify-ui/commit/b940de62a2061c9e6f1e5f2ada09ed7153dbeec9) Thanks [@joebuono](https://github.com/joebuono)! - Add `nonce` prop to AmplifyProvider to allow strict CSP rules
+
+- Updated dependencies [[`b9a181bc9`](https://github.com/aws-amplify/amplify-ui/commit/b9a181bc9da2411017877a91dc931812e8371bb8)]:
+  - @aws-amplify/ui@3.6.2
+
 ## 2.15.1
 
 ### Patch Changes
