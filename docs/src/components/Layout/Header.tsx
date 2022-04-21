@@ -6,12 +6,17 @@ import {
   Divider,
   Flex,
   Link,
+  SearchField,
   ToggleButton,
   ToggleButtonGroup,
   View,
   VisuallyHidden,
 } from '@aws-amplify/ui-react';
-import { Hits, InstantSearch, SearchBox } from 'react-instantsearch-dom';
+import {
+  InstantSearch,
+  connectHits,
+  connectSearchBox,
+} from 'react-instantsearch-dom';
 import {
   MdBedtime,
   MdClose,
@@ -21,7 +26,6 @@ import {
   MdWbSunny,
 } from 'react-icons/md';
 
-import { DocSearch } from '@docsearch/react';
 import { FrameworkChooser } from './FrameworkChooser';
 import LinkButton from './LinkButton';
 import { Logo } from '@/components/Logo';
@@ -29,6 +33,31 @@ import NextLink from 'next/link';
 import { SecondaryNav } from './SecondaryNav';
 import algoliasearch from 'algoliasearch/lite';
 import { useRouter } from 'next/router';
+
+const SearchBox = (data) => {
+  const { currentRefinement, isSearchStalled, refine } = data;
+  console.log('data --> ', data);
+  return (
+    <form noValidate action="" role="search">
+      <SearchField
+        placeholder="Search..."
+        value={currentRefinement}
+        onChange={(event) => refine(event.currentTarget.value)}
+        onSubmit={() => refine('')}
+      />
+      {isSearchStalled ? 'My search is stalled' : ''}
+    </form>
+  );
+};
+
+const Hits = ({ hits }) => {
+  console.log(hits);
+  return null;
+};
+
+const CustomSearchBox = connectSearchBox(SearchBox);
+
+const CustomHits = connectHits(Hits);
 
 const NavLink = ({
   href,
@@ -114,19 +143,12 @@ const ColorModeSwitcher = ({ colorMode, setColorMode }) => {
 
 export const Header = ({ platform, colorMode, setColorMode }) => {
   const [expanded, setExpanded] = React.useState(false);
-  const [query, setQuery] = React.useState('');
-  const [hits, setHits] = React.useState([]);
+  const [showSearchResult, setShowSearchResult] = React.useState(false);
 
   const searchClient = algoliasearch(
     'VWBXXCSMEN',
     'a9a0e0bf1d18ac636881324e877bd471'
   );
-  const index = searchClient.initIndex('amplify-dev-ui');
-  console.log('Nice');
-  console.log(index);
-  React.useEffect(() => {
-    index.search(query).then((data) => console.log(data));
-  }, [query]);
 
   return (
     <>
@@ -151,15 +173,12 @@ export const Header = ({ platform, colorMode, setColorMode }) => {
         </NavLink>
 
         <Nav />
-        <DocSearch
-          appId="VWBXXCSMEN"
-          apiKey="a9a0e0bf1d18ac636881324e877bd471"
-          indexName="amplify-dev-ui"
-        />
-        <InstantSearch indexName="amplify-dev-ui" searchClient={searchClient}>
-          <SearchBox />
-          <Hits />
-        </InstantSearch>
+        <View>
+          <InstantSearch indexName="amplify-dev-ui" searchClient={searchClient}>
+            <CustomSearchBox />
+            {true && <CustomHits />}
+          </InstantSearch>
+        </View>
         <Settings
           colorMode={colorMode}
           setColorMode={setColorMode}
