@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Card, Collection, SearchField } from '@aws-amplify/ui-react';
+import { Card, Collection, Link, SearchField } from '@aws-amplify/ui-react';
 import {
   InstantSearch,
   connectHits,
@@ -46,11 +46,23 @@ const Hits = ({ hits }) => {
       {({ currentRefinement }) => {
         console.log('current ->', currentRefinement);
         return currentRefinement ? (
-          <ol>
-            {hits.map((hit) => (
-              <li key={hit.objectID}>{hit.hierarchy.lvl1}</li>
-            ))}
-          </ol>
+          <Collection
+            type="list"
+            items={hits.slice(0, 8)}
+            rowGap={'0.1em'}
+            direction="column"
+            justifyContent="space-between"
+            wrap="wrap"
+            className="search__result"
+            height={'30rem'}
+            width={'10rem'}
+          >
+            {(item, index) => (
+              <Card key={index} padding="1rem">
+                <Link href={item.url}>{item.hierarchy.lvl1}</Link>
+              </Card>
+            )}
+          </Collection>
         ) : null;
       }}
     </SearchContext.Consumer>
