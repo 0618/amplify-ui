@@ -43,3 +43,21 @@
     color: inherit;
   }
 }
+
+// Modal
+.DocSearch-Modal {
+  .DocSearch-MagnifierLabel,
+  .DocSearch-Hit-source,
+  .DocSearch-Hits mark,
+  .DocSearch-Logo svg {
+    color: var(--amplify-colors-brand-primary-60);
+  }
+
+  .DocSearch-Form {
+    box-shadow: inset 0 0 0 2px var(--amplify-colors-brand-primary-60);
+  }
+
+  .DocSearch-Hit[aria-selected='true'] a {
+    background-color: var(--amplify-colors-brand-primary-60);
+  }
+}
