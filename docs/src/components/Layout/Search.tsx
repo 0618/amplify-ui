@@ -1,12 +1,12 @@
 import * as React from 'react';
 
+import { Card, Collection, SearchField } from '@aws-amplify/ui-react';
 import {
   InstantSearch,
   connectHits,
   connectSearchBox,
 } from 'react-instantsearch-dom';
 
-import { SearchField } from '@aws-amplify/ui-react';
 import algoliasearch from 'algoliasearch/lite';
 
 const SearchContext = React.createContext({
@@ -16,12 +16,14 @@ const SearchContext = React.createContext({
 
 const SearchBox = (data) => {
   const { currentRefinement, isSearchStalled, refine } = data;
-  console.log('data --> ', data);
+  console.log('data --> ', data); // TODO: remove console log
   return (
     <SearchContext.Consumer>
       {({ setCurrentRefinement }) => (
         <form noValidate action="" role="search">
           <SearchField
+            label="search"
+            labelHidden={true}
             placeholder="Search..."
             value={currentRefinement}
             onChange={(event) => {
@@ -38,7 +40,7 @@ const SearchBox = (data) => {
 };
 
 const Hits = ({ hits }) => {
-  console.log(hits);
+  console.log(hits); // TODO: remove console log
   return (
     <SearchContext.Consumer>
       {({ currentRefinement }) => {
