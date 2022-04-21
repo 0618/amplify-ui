@@ -54,8 +54,6 @@ const Hits = ({ hits }) => {
             justifyContent="space-between"
             wrap="wrap"
             className="search__result"
-            height={'30rem'}
-            width={'10rem'}
           >
             {(item, index) => (
               <Card key={index} padding="1rem">
