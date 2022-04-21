@@ -34,25 +34,49 @@ import { SecondaryNav } from './SecondaryNav';
 import algoliasearch from 'algoliasearch/lite';
 import { useRouter } from 'next/router';
 
+const SearchContext = React.createContext({
+  currentRefinement: '',
+  setCurrentRefinement: (val) => {},
+});
+
 const SearchBox = (data) => {
   const { currentRefinement, isSearchStalled, refine } = data;
   console.log('data --> ', data);
   return (
-    <form noValidate action="" role="search">
-      <SearchField
-        placeholder="Search..."
-        value={currentRefinement}
-        onChange={(event) => refine(event.currentTarget.value)}
-        onSubmit={() => refine('')}
-      />
-      {isSearchStalled ? 'My search is stalled' : ''}
-    </form>
+    <SearchContext.Consumer>
+      {({ setCurrentRefinement }) => (
+        <form noValidate action="" role="search">
+          <SearchField
+            placeholder="Search..."
+            value={currentRefinement}
+            onChange={(event) => {
+              setCurrentRefinement(event.currentTarget.value);
+              return refine(event.currentTarget.value);
+            }}
+            onSubmit={() => refine('')}
+          />
+          {isSearchStalled ? 'My search is stalled' : ''}
+        </form>
+      )}
+    </SearchContext.Consumer>
   );
 };
 
 const Hits = ({ hits }) => {
   console.log(hits);
-  return null;
+  return (
+    <SearchContext.Consumer>
+      {({ currentRefinement }) => {
+        return currentRefinement ? (
+          <ol>
+            {hits.map((hit) => (
+              <li key={hit.objectID}>{hit.hierarchy.lvl1}</li>
+            ))}
+          </ol>
+        ) : null;
+      }}
+    </SearchContext.Consumer>
+  );
 };
 
 const CustomSearchBox = connectSearchBox(SearchBox);
@@ -143,7 +167,7 @@ const ColorModeSwitcher = ({ colorMode, setColorMode }) => {
 
 export const Header = ({ platform, colorMode, setColorMode }) => {
   const [expanded, setExpanded] = React.useState(false);
-  const [showSearchResult, setShowSearchResult] = React.useState(false);
+  const [currentRefinement, setCurrentRefinement] = React.useState('');
 
   const searchClient = algoliasearch(
     'VWBXXCSMEN',
@@ -174,10 +198,22 @@ export const Header = ({ platform, colorMode, setColorMode }) => {
 
         <Nav />
         <View>
-          <InstantSearch indexName="amplify-dev-ui" searchClient={searchClient}>
-            <CustomSearchBox />
-            {true && <CustomHits />}
-          </InstantSearch>
+          <SearchContext.Provider
+            value={
+              { currentRefinement, setCurrentRefinement } as {
+                currentRefinement: string;
+                setCurrentRefinement: (string) => void;
+              }
+            }
+          >
+            <InstantSearch
+              indexName="amplify-dev-ui"
+              searchClient={searchClient}
+            >
+              <CustomSearchBox />
+              {true && <CustomHits />}
+            </InstantSearch>
+          </SearchContext.Provider>
         </View>
         <Settings
           colorMode={colorMode}
