@@ -22,8 +22,6 @@ function MyApp({ Component, pageProps }) {
   const { platform = 'react' } = router.query;
   const [colorMode, setColorMode] = React.useState<ColorMode>('system');
   const [themeOverride, setThemeOverride] = React.useState('');
-  const [isLoading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
     document.documentElement.setAttribute(
@@ -34,22 +32,6 @@ function MyApp({ Component, pageProps }) {
 
   configure();
   trackPageVisit();
-
-  React.useEffect(() => {
-    setLoading(true);
-    const url =
-      'https://v0gikdsf4c.execute-api.us-east-1.amazonaws.com/test/search/?q=amplify'; // API Gateway set up in 200176217753 https://tiny.amazon.com/18sedylu0/IsenLink
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setData(data);
-        console.log(data);
-      });
-  }, []);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No search data</p>;
 
   if (
     !META_INFO[router.pathname]?.description ||

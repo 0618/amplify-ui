@@ -1,29 +1,32 @@
 import * as React from 'react';
-import NextLink from 'next/link';
+
 import {
   Button,
-  VisuallyHidden,
-  Link,
-  Flex,
   ColorMode,
+  Divider,
+  Flex,
+  Link,
   ToggleButton,
   ToggleButtonGroup,
-  Divider,
   View,
+  VisuallyHidden,
 } from '@aws-amplify/ui-react';
 import {
+  MdBedtime,
   MdClose,
   MdMenu,
-  MdWbSunny,
-  MdBedtime,
-  MdTonality,
   MdOpenInNew,
+  MdTonality,
+  MdWbSunny,
 } from 'react-icons/md';
-import { useRouter } from 'next/router';
-import { Logo } from '@/components/Logo';
+
 import { FrameworkChooser } from './FrameworkChooser';
-import { SecondaryNav } from './SecondaryNav';
 import LinkButton from './LinkButton';
+import { Logo } from '@/components/Logo';
+import NextLink from 'next/link';
+import { Search } from './Search';
+import { SecondaryNav } from './SecondaryNav';
+import { useRouter } from 'next/router';
 
 const NavLink = ({
   href,
@@ -135,6 +138,10 @@ export const Header = ({ platform, colorMode, setColorMode }) => {
         </NavLink>
 
         <Nav />
+
+        <View>
+          <Search />
+        </View>
 
         <Settings
           colorMode={colorMode}
