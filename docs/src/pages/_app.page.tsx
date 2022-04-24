@@ -1,14 +1,16 @@
-import * as React from 'react';
-import Head from 'next/head';
-import Script from 'next/script';
-import { useRouter } from 'next/router';
-import { AmplifyProvider, ColorMode } from '@aws-amplify/ui-react';
-
-import { Header } from '@/components/Layout/Header';
-import { configure, trackPageVisit } from '../utils/track';
-import { theme } from '../theme';
-import { META_INFO } from '@/data/meta';
 import '../styles/index.scss';
+
+import * as React from 'react';
+
+import { AmplifyProvider, ColorMode } from '@aws-amplify/ui-react';
+import { configure, trackPageVisit } from '../utils/track';
+
+import Head from 'next/head';
+import { Header } from '@/components/Layout/Header';
+import { META_INFO } from '@/data/meta';
+import Script from 'next/script';
+import { theme } from '../theme';
+import { useRouter } from 'next/router';
 
 // suppress useLayoutEffect warnings when running outside a browser
 // See: https://gist.github.com/gaearon/e7d97cdf38a2907924ea12e4ebdf3c85#gistcomment-3886909
@@ -20,6 +22,8 @@ function MyApp({ Component, pageProps }) {
   const { platform = 'react' } = router.query;
   const [colorMode, setColorMode] = React.useState<ColorMode>('system');
   const [themeOverride, setThemeOverride] = React.useState('');
+  const [isLoading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
     document.documentElement.setAttribute(
@@ -30,6 +34,22 @@ function MyApp({ Component, pageProps }) {
 
   configure();
   trackPageVisit();
+
+  React.useEffect(() => {
+    setLoading(true);
+    const url =
+      'https://v0gikdsf4c.execute-api.us-east-1.amazonaws.com/test/search/?q=amplify'; // API Gateway set up in 200176217753 https://tiny.amazon.com/18sedylu0/IsenLink
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        setData(data);
+        console.log(data);
+      });
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No search data</p>;
 
   if (
     !META_INFO[router.pathname]?.description ||

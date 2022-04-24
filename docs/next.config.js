@@ -44,6 +44,10 @@ module.exports = withNextPluginPreval({
             key: 'X-Content-Type-Options',
             value: 'nosniff',
           },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
           // for 'Content-Security-Policy', see _document.page.tsx
         ],
       },

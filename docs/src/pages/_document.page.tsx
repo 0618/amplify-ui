@@ -1,6 +1,7 @@
-import crypto from 'crypto';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
+
 import type { HtmlProps } from 'next/dist/shared/lib/utils';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import crypto from 'crypto';
 
 const favicon =
   process.env.NODE_ENV === 'development'
@@ -26,7 +27,7 @@ const getCSPContent = (context: Readonly<HtmlProps>) => {
       font-src 'self' data:;
       frame-src 'self' *.codesandbox.io;
       img-src 'self' cm.everesttech.net amazonwebservices.d2.sc.omtrdc.net dpm.demdex.net;
-      connect-src 'self' *.shortbread.aws.dev amazonwebservices.d2.sc.omtrdc.net dpm.demdex.net ;
+      connect-src 'self' *.shortbread.aws.dev amazonwebservices.d2.sc.omtrdc.net dpm.demdex.net *.amazonaws.com;
       script-src 'unsafe-eval' 'self' '${cspInlineScriptHash}' a0.awsstatic.com;
     `;
   }
