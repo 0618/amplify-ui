@@ -5,14 +5,12 @@ import {
   ColorMode,
   Divider,
   Flex,
-  IconSearch,
   Link,
   ToggleButton,
   ToggleButtonGroup,
   View,
   VisuallyHidden,
 } from '@aws-amplify/ui-react';
-import { Hits, InstantSearch, SearchBox } from 'react-instantsearch-dom';
 import {
   MdBedtime,
   MdClose,
@@ -28,7 +26,6 @@ import LinkButton from './LinkButton';
 import { Logo } from '@/components/Logo';
 import NextLink from 'next/link';
 import { SecondaryNav } from './SecondaryNav';
-import algoliasearch from 'algoliasearch/lite';
 import { useRouter } from 'next/router';
 
 const NavLink = ({
@@ -86,9 +83,9 @@ const Nav = (props) => (
 const Settings = ({ platform, setColorMode, colorMode }) => (
   <Flex className="docs-settings" justifyContent="center" alignItems="center">
     <DocSearch
-      appId="VU7DJNARXL"
-      apiKey="cf8133ae2d680d3888c37f43dd2aef10"
-      indexName="aws_amplify_new"
+      appId={process.env.DOCSEARCH_DOCS_APP_ID}
+      apiKey={process.env.DOCSEARCH_DOCS_API_KEY}
+      indexName={process.env.DOCSEARCH_DOCS_INDEX_NAME}
     />
     <FrameworkChooser platform={platform} />
     <ColorModeSwitcher setColorMode={setColorMode} colorMode={colorMode} />
