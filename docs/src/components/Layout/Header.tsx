@@ -86,9 +86,9 @@ const Nav = (props) => (
 const Settings = ({ platform, setColorMode, colorMode }) => (
   <Flex className="docs-settings" justifyContent="center" alignItems="center">
     <DocSearch
-      appId="VWBXXCSMEN"
-      apiKey="a9a0e0bf1d18ac636881324e877bd471"
-      indexName="amplify-dev-ui"
+      appId="VU7DJNARXL"
+      apiKey="cf8133ae2d680d3888c37f43dd2aef10"
+      indexName="aws_amplify_new"
     />
     <FrameworkChooser platform={platform} />
     <ColorModeSwitcher setColorMode={setColorMode} colorMode={colorMode} />
@@ -127,11 +127,11 @@ export const Header = ({ platform, colorMode, setColorMode }) => {
   const [hits, setHits] = React.useState([]);
 
   const searchClient = algoliasearch(
-    'VWBXXCSMEN',
-    'a9a0e0bf1d18ac636881324e877bd471'
+    'VU7DJNARXL',
+    'cf8133ae2d680d3888c37f43dd2aef10'
   );
-  const index = searchClient.initIndex('amplify-dev-ui');
-  console.log('Nice');
+  const index = searchClient.initIndex('aws_amplify_new');
+  console.log('Nice!');
   console.log(index);
   React.useEffect(() => {
     index.search(query).then((data) => console.log(data));
