@@ -123,19 +123,6 @@ const ColorModeSwitcher = ({ colorMode, setColorMode }) => {
 
 export const Header = ({ platform, colorMode, setColorMode }) => {
   const [expanded, setExpanded] = React.useState(false);
-  const [query, setQuery] = React.useState('');
-  const [hits, setHits] = React.useState([]);
-
-  const searchClient = algoliasearch(
-    'VU7DJNARXL',
-    'cf8133ae2d680d3888c37f43dd2aef10'
-  );
-  const index = searchClient.initIndex('aws_amplify_new');
-  console.log('Nice!');
-  console.log(index);
-  React.useEffect(() => {
-    index.search(query).then((data) => console.log(data));
-  }, [query]);
 
   return (
     <>
