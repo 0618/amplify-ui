@@ -58,35 +58,35 @@ jobs:
         run: yarn build
         working-directory: ./canary
 
-  publish:
-    runs-on: ubuntu-latest
-    environment: ci
-    needs: build-test
-    if: ${{ needs.setup.outputs.has-changesets != 'true' }}
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
-          fetch-depth: 0
-      - name: Setup Node.js LTS
-        uses: actions/setup-node@v2
-        with:
-          node-version: lts/*
-          cache: 'yarn'
-      - name: Install packages
-        uses: ./.github/actions/install-with-retries
-        with:
-          skip-cypress-binary: true # publishing doesn't need cypress
-      - name: Build packages
-        run: yarn build
-      - name: Publish to @latest
-        uses: changesets/action@b98cec97583b917ff1dc6179dd4d230d3e439894
-        with:
-          publish: yarn publish:latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  # publish:
+  #   runs-on: ubuntu-latest
+  #   environment: ci
+  #   needs: build-test
+  #   if: ${{ needs.setup.outputs.has-changesets != 'true' }}
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v3
+  #       with:
+  #         # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+  #         fetch-depth: 0
+  #     - name: Setup Node.js LTS
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: lts/*
+  #         cache: 'yarn'
+  #     - name: Install packages
+  #       uses: ./.github/actions/install-with-retries
+  #       with:
+  #         skip-cypress-binary: true # publishing doesn't need cypress
+  #     - name: Build packages
+  #       run: yarn build
+  # - name: Publish to @latest
+  #   uses: changesets/action@b98cec97583b917ff1dc6179dd4d230d3e439894
+  #   with:
+  #     publish: yarn publish:latest
+  #   env:
+  #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   log-failure-metric:
     # Send data point 1 to metric PublishNPMFailure, if it's a failure
@@ -96,7 +96,7 @@ jobs:
     if: ${{ failure() }}
     steps:
       - name: Log failure data point to metric PublishNPMFailure
-        uses: aws-amplify/amplify-ui/.github/actions/log-metric@main
+        uses: 0618/amplify-ui/.github/actions/log-metric@main
         with:
           metric-name: PublishNPMFailure
           value: 1
@@ -111,7 +111,7 @@ jobs:
     if: ${{ success() }}
     steps:
       - name: Log success data point to metric PublishNPMFailure
-        uses: aws-amplify/amplify-ui/.github/actions/log-metric@main
+        uses: 0618/amplify-ui/.github/actions/log-metric@main
         with:
           metric-name: PublishNPMFailure
           value: 0

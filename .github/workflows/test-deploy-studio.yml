@@ -12,7 +12,7 @@ on:
 
 jobs:
   test:
-    uses: aws-amplify/amplify-ui/.github/workflows/reusable-e2e.yml@main
+    uses: 0618/amplify-ui/.github/workflows/reusable-e2e.yml@main
     with:
       commit: ${{ github.sha }}
       repository: ${{ github.repository }}
@@ -29,33 +29,33 @@ jobs:
       DOCSEARCH_DOCS_API_KEY: ${{ secrets.DOCSEARCH_DOCS_API_KEY }}
       DOCSEARCH_DOCS_INDEX_NAME: ${{ secrets.DOCSEARCH_DOCS_INDEX_NAME }}
 
-  publish:
-    needs: test
-    runs-on: ubuntu-latest
-    environment: deployment
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-      - name: Setup Node.js LTS
-        uses: actions/setup-node@v2
-        with:
-          node-version: lts/*
-          cache: 'yarn'
-      - name: Install packages
-        uses: ./.github/actions/install-with-retries
-        with:
-          skip-cypress-binary: true # publishing doesn't need cypress
-      - name: Build packages
-        run: yarn build
-      - name: Bump ui and ui-react packages
-        run: cp .github/changeset-presets/bump-react.md .changeset
-      - name: Run changeset version to studio tag
-        run: yarn version:studio
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Publish to studio tag
-        run: yarn publish:studio
+  # publish:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   environment: deployment
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v3
+  #     - name: Setup Node.js LTS
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: lts/*
+  #         cache: 'yarn'
+  #     - name: Install packages
+  #       uses: ./.github/actions/install-with-retries
+  #       with:
+  #         skip-cypress-binary: true # publishing doesn't need cypress
+  #     - name: Build packages
+  #       run: yarn build
+  #     - name: Bump ui and ui-react packages
+  #       run: cp .github/changeset-presets/bump-react.md .changeset
+  #     - name: Run changeset version to studio tag
+  #       run: yarn version:studio
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Create .npmrc
+  #       run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+  #       env:
+  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #     - name: Publish to studio tag
+  #       run: yarn publish:studio
