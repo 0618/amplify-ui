@@ -92,7 +92,7 @@ jobs:
     # Send data point 1 to metric PublishNPMFailure, if it's a failure
     runs-on: ubuntu-latest
     environment: ci
-    needs: publish
+    needs: build-test
     if: ${{ failure() }}
     steps:
       - name: Log failure data point to metric PublishNPMFailure
@@ -107,7 +107,7 @@ jobs:
     # Send data point 0 to metric PublishNPMFailure, if  it's a success
     runs-on: ubuntu-latest
     environment: ci
-    needs: publish
+    needs: build-test
     if: ${{ success() }}
     steps:
       - name: Log success data point to metric PublishNPMFailure
