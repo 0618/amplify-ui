@@ -103,12 +103,11 @@ jobs:
     if: ${{ failure() }}
     steps:
       - name: Log failure data point to metric RunTimeTestsFailure
-        uses: ./.github/actions/log-metric
+        uses: ./.github/actions/log-metric@main
         with:
           metric-name: RunTimeTestsFailure
           value: 1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SITE_URL: ${{ secrets.SITE_URL }}
 
   log-success-metric:
     # Send data point 0 to metric RunTimeTestsFailure, if  it's a success
@@ -117,9 +116,8 @@ jobs:
     if: ${{ success() }}
     steps:
       - name: Log success data point to metric RunTimeTestsFailure
-        uses: ./.github/actions/log-metric
+        uses: ./.github/actions/log-metric@main
         with:
           metric-name: RunTimeTestsFailure
           value: 0
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SITE_URL: ${{ secrets.SITE_URL }}
