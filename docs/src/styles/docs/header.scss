@@ -97,6 +97,15 @@
   top: 0.125rem;
 }
 
+.docs-logo-svg--xl {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  // because the logo is text in the SVG with descenders (p,y),
+  // this is to make the baseline of the logo text line up
+  top: 0.125rem;
+}
+
 .docs-logo-link:hover {
   --amplify-colors-font-primary: var(--amplify-colors-brand-primary-60);
 }
