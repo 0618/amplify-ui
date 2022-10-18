@@ -31,12 +31,12 @@ applications:
       phases:
         preTest:
           commands:
-            - npm ci
+            - yarn install
             - yarn add wait-on
             - yarn add pm2
             - yarn add mocha@5.2.0 mochawesome mochawesome-merge mochawesome-report-generator
             # - npx pm2 start npm -- start
-            - 'yarn docs dev & npx wait-on http://localhost:5001'
+            - 'yarn dev & npx wait-on http://localhost:5001'
         test:
           commands:
             - 'npx cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
