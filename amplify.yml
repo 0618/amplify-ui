@@ -45,7 +45,7 @@ applications:
             - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
             - npx pm2 kill
       artifacts:
-        baseDirectory: docs/cypress
+        baseDirectory: cypress
         configFilePath: '**/mochawesome.json'
         files:
           - '**/*.png'
