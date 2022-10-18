@@ -52,4 +52,3 @@ applications:
         files:
           - '**/*.png'
           - '**/*.mp4'
-      appRoot: docs
