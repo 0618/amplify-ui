@@ -1,6 +1,7 @@
 version: 1
 applications:
-  - frontend:
+  - appRoot: docs
+    frontend:
       phases:
         preBuild:
           commands:
@@ -26,8 +27,7 @@ applications:
         baseDirectory: .next
         files:
           - '**/*'
-    appRoot: docs
-  - test:
+    test:
       phases:
         preTest:
           commands:
