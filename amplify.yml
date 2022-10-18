@@ -31,14 +31,12 @@ applications:
       phases:
         preTest:
           commands:
-            - rm -rf node_modules
-            - node -v
             - npm ci
-            - npm install wait-on
-            - npm install pm2
-            - npm install mocha@5.2.0 mochawesome mochawesome-merge mochawesome-report-generator
+            - yarn add wait-on
+            - yarn add pm2
+            - yarn add mocha@5.2.0 mochawesome mochawesome-merge mochawesome-report-generator
             # - npx pm2 start npm -- start
-            - 'npm run dev & npx wait-on http://localhost:5001'
+            - 'yarn docs dev & npx wait-on http://localhost:5001'
         test:
           commands:
             - 'npx cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
@@ -47,7 +45,7 @@ applications:
             - npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
             - npx pm2 kill
       artifacts:
-        baseDirectory: cypress
+        baseDirectory: docs/cypress
         configFilePath: '**/mochawesome.json'
         files:
           - '**/*.png'
