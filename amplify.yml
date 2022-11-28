@@ -6,8 +6,8 @@ applications:
         preBuild:
           commands:
             - rm -rf node_modules
-            - nvm install 17 # NodeJS 17 is the latest version that Amplify Hosting supports
-            - nvm use 17
+            - nvm install 16.13 # NodeJS 16.13+ is the latest version that Amplify Hosting supports
+            - nvm use 16
             - node -v
             - export FLUTTER_HOME=${HOME}/sdks/flutter
             - git clone -b stable --depth 1 https://github.com/flutter/flutter.git ${FLUTTER_HOME}
@@ -18,8 +18,8 @@ applications:
             - (cd .. && yarn install && yarn build)
         build:
           commands:
-            - nvm install 17
-            - nvm use 17
+            - nvm install 16.13
+            - nvm use 16
             - node -v
             - yarn flutter:build
             - yarn build
@@ -31,8 +31,8 @@ applications:
       phases:
         preTest:
           commands:
-            - nvm install 17 # NodeJS 17 is the latest version that Amplify Hosting supports
-            - nvm use 17
+            - nvm install 16.13 # NodeJS 16.13+ is the latest version that Amplify Hosting supports
+            - nvm use 16
             - npm install -g npm@7 # TODO: remove this line once update @angular-devkit packages.
             - export NODE_OPTIONS="--max-old-space-size=8192"
             - npm install
