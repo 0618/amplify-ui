@@ -79,9 +79,7 @@
     "**/serve/serve-handler/minimatch": "3.0.5",
     "trim": "^0.0.3",
     "vscode-vue-languageservice": "0.27.26",
-    "ws": "^7.4.6",
-    "pretty-format": "27.5.1",
-    "expect": "27.5.1"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.1",
