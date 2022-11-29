@@ -9,6 +9,7 @@ applications:
             - nvm install 16.13 # NodeJS 16.13+ is the latest version that Amplify Hosting supports
             - nvm use 16
             - node -v
+            - yarn cache clean --force
             - export FLUTTER_HOME=${HOME}/sdks/flutter
             - git clone -b stable --depth 1 https://github.com/flutter/flutter.git ${FLUTTER_HOME}
             - export PATH="$PATH:${FLUTTER_HOME}/bin"
