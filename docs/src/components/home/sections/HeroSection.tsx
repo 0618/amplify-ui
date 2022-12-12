@@ -43,7 +43,7 @@ export const HeroSection = () => {
           alignItems="center"
         >
           <Heading level={1} marginBlockEnd="0">
-            Themeable, accessible components
+            👋 Hi Next.js 13 Themeable, accessible components
             <br />
             <strong>Ready to connect to the cloud</strong>
           </Heading>
