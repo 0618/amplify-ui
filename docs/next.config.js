@@ -186,6 +186,10 @@ module.exports = withNextPluginPreval({
 
     // See: https://mdxjs.com/docs/getting-started/#nextjs
     config.module.rules.push({
+      experimental: {
+        // this includes files from the monorepo base two directories up [ref](https://github.com/aws-amplify/amplify-hosting/issues/3153)
+        outputFileTracingRoot: path.join(__dirname, '../'),
+      },
       test: /\.page.mdx$/,
       use: [
         {
