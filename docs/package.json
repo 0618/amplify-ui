@@ -7,7 +7,7 @@
     "preflutter:build": "yarn flutter:clean",
     "flutter:build": "(cd flutter/authenticator && flutter build web)",
     "postflutter:build": "yarn flutter:copy",
-    "flutter:clean": "rm -rf public/flutter/authenticator && flutter pub get && flutter clean",
+    "flutter:clean": "rm -rf public/flutter/authenticator && flutter clean && flutter pub get",
     "flutter:copy": "cp -r ./flutter/authenticator/build/web public/flutter/authenticator",
     "build": "yarn build:props-tables && next build",
     "build:props-tables": "node --require esbuild-register ./scripts/generate-props-tables-data.ts",
