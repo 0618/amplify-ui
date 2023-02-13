@@ -78,6 +78,7 @@
     "jsdom": "^21.1.0",
     "postcss": "^8.2.6",
     "react-markdown": "^8.0.3",
+    "selenium-webdriver": "^4.8.0",
     "sitemap-urls": "^3.0.0",
     "ts-jest": "^27",
     "ts-morph": "^15.1.0"
