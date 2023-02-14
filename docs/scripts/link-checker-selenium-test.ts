@@ -23,23 +23,35 @@ const testPaths = end ? sitePaths.slice(+start, +end) : sitePaths.slice(+start);
     .setChromeService(service)
     .build();
 
-  testPaths.forEach(async (path, idx) => {
+  const pageChecked = testPaths.map(async (path, pageIdx) => {
     await driver.get(path);
     const linkElements = await driver.findElements(By.tagName('a'));
-    for (let [index, e] of linkElements.entries()) {
+    const linksChecked = linkElements.map(async (e, linkIdx) => {
       const link = await e.getAttribute('href');
       const tagName = await e.getTagName();
       const tagText = await e.getText();
-      console.log('⭐', idx, index);
-      await checkURL(path, tagName, tagText, link);
-    }
+      console.log(`⭐ page #${pageIdx} link #${linkIdx}`);
+      return await checkURL(link, tagName, tagText, path, pageIdx, linkIdx);
+    });
+    return Promise.allSettled(linksChecked);
+  });
+
+  Promise.allSettled(pageChecked).then(() => {
+    driver.quit();
   });
 })();
 
-async function checkURL(urlOrPath, tagName, tagText, pageUrl) {
+async function checkURL(
+  urlOrPath,
+  tagName,
+  tagText,
+  pageUrl,
+  pageIdx,
+  linkIdx
+) {
   if (IGNORED_LINKS.includes(urlOrPath)) {
     console.log(
-      `⏭[SKIPPING...] ${urlOrPath} from ${tagName} tag "${tagText}" on ${pageUrl}, because it is on the IGNORED_LINKS list.`
+      `⏭[SKIPPING...] link #${linkIdx} ${urlOrPath} from ${tagName} tag "${tagText}" on page #${pageIdx} ${pageUrl}, because it is on the IGNORED_LINKS list.`
     );
   } else if (urlOrPath.includes('http://')) {
     const request = await http.get(urlOrPath, ({ statusCode }) =>
@@ -60,9 +72,13 @@ async function checkURL(urlOrPath, tagName, tagText, pageUrl) {
     statusCode: number;
     url: string;
   }) {
-    if ([200, 301, 303].includes(statusCode)) {
+    if (
+      [200, 301, 303, /*Start To remove */ 308 /*End To remove*/].includes(
+        statusCode
+      )
+    ) {
       console.log(
-        `↩️ [RETURNING STATUS...] ${statusCode} for ${urlOrPath} from ${tagName} tag "${tagText}" on ${pageUrl}`
+        `↩️ [RETURNING STATUS...] ${statusCode} for link #${linkIdx} ${urlOrPath} from ${tagName} tag "${tagText}" on page #${pageIdx} ${pageUrl}`
       );
     } else {
       throw new Error(
