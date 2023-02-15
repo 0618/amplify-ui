@@ -16,6 +16,7 @@
         "./node_modules/@aws-sdk/node-http-handler"
       ]
     },
+    "types": ["node", "cypress"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,

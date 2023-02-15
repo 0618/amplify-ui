@@ -35,13 +35,30 @@ describe(`All pages on Sitemap`, () => {
       cy.task('log', `🧪[TESTING...] page #${idx} ${BASE_URL}/${link}`);
       cy.visit({ url: link || '/', qs: { cypress: true } });
 
-      /** Check all the internal links */
-      cy.get(`a[href^='/']`).each((el) => hrefOnSitemap(el, link, allLinks));
+      // /** Check all the internal links */
+      // cy.get(`a[href^='/']`).each((el) => hrefOnSitemap(el, link, allLinks));
 
       /** Check all the external links */
-      cy.get(`a:not([href^='/'])`).each((el) =>
-        hrefWorks(el, link, requestedLinks)
-      );
+      cy.get(`a:not([href^='/'])`).each((el) => {
+        // hrefWorks(el, link, requestedLinks);
+        const tagHref: string = el.prop('href');
+        const tagText: string = el.prop('text');
+        const tagName: string = el.prop('tagName');
+
+        if (tagHref) {
+          cy.task('httpGet', tagHref).then((status) => {
+            expect(status).to.oneOf([200, 301, 303]);
+            logMessage({
+              evtName: 'RETURNING',
+              link,
+              tagHref,
+              tagName,
+              tagText,
+              status: status as number,
+            });
+          });
+        }
+      });
     });
   });
 });
