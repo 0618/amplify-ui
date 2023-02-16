@@ -17,6 +17,8 @@ jobs:
         uses: celinekurpershoek/link-checker@v1.0.2
         with:
           url: 'https://dev.ui.docs.amplify.aws/'
+          honorRobotExclusions: false
+          recursiveLinks: true
       - name: Get the result
         run: echo "${{steps.link-report.outputs.result}}"
   # build:
