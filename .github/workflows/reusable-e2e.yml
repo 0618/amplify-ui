@@ -422,7 +422,7 @@ jobs:
         run: yarn docs start & npx wait-on -c waitOnConfig.json -t 20000 http-get://localhost:3000
 
       - name: Run Docs link checker
-        run: yarn docs test:links
+        run: ls -la ~/.cache && yarn docs test:links
         id: link-checker
 
       - name: Run E2E tests against docs
