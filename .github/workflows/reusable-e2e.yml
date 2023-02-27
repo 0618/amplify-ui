@@ -400,14 +400,14 @@ jobs:
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 3
 
-      - name: Restore puppeteer cache
-        uses: actions/cache@v3
-        id: restore-cache
-        with:
-          path: ~/.cache/puppeteer
-          key: ${{ runner.os }}-puppeteer-${{ inputs.commit }}
-        env:
-          SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
+      # - name: Restore puppeteer cache
+      #   uses: actions/cache@v3
+      #   id: restore-cache
+      #   with:
+      #     path: ~/.cache/puppeteer
+      #     key: ${{ runner.os }}-puppeteer-${{ inputs.commit }}
+      #   env:
+      #     SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
 
       - name: Install packages
         if: steps.restore-cache.outputs.cache-hit != 'true' || steps.restore-cypress-cache.outputs.cache-hit != 'true'
