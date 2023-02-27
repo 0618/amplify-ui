@@ -88,6 +88,11 @@ jobs:
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('yarn.lock') }}
+      - name: Cache Puppeteer
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/puppeteer
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
       - name: Cache packages/ui/dist
         uses: actions/cache@v3
         with:
@@ -381,6 +386,15 @@ jobs:
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('yarn.lock') }}
+        env:
+          SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
+
+      - name: Restore puppeteer cache
+        uses: actions/cache@v3
+        id: restore-puppeteer-cache
+        with:
+          path: ~/.cache/puppeteer
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
 
