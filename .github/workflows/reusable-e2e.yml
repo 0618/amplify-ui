@@ -74,6 +74,14 @@ jobs:
           key: ${{ runner.os }}-cypress-${{ hashFiles('yarn.lock') }}
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
+      - name: Restore puppeteer runner from Cache
+        uses: actions/cache@v3
+        id: restore-puppeteer-cache
+        with:
+          path: ~/.cache/Cypress
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
+        env:
+          SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
       - name: Install packages
         uses: ./.github/actions/install-with-retries
         with:
@@ -89,6 +97,8 @@ jobs:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('yarn.lock') }}
       - name: Cache Puppeteer
+        # create new puppeteer cache entry only if puppeteer cache missed and we installed a new one.
+        if: steps.restore-puppeteer-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         with:
           path: ~/.cache/puppeteer
