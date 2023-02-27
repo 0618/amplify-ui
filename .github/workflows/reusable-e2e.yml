@@ -424,6 +424,9 @@ jobs:
       - name: Build react package
         run: yarn react build
 
+      - name: Install puppeteer
+        run: yarn docs add -D puppeteer
+
       - name: Build docs package
         run: yarn docs build
         env:
