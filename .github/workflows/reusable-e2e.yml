@@ -89,8 +89,6 @@ jobs:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('yarn.lock') }}
       - name: Cache Puppeteer
-        # create new puppeteer cache entry only if cypress cache missed and we installed a new one.
-        if: steps.restore-puppeteer-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         with:
           path: ~/.cache/puppeteer
@@ -412,7 +410,7 @@ jobs:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 3
 
       - name: Install packages
-        if: steps.restore-cache.outputs.cache-hit != 'true' || steps.restore-cypress-cache.outputs.cache-hit != 'true' || steps.restore-steps.restore-cypress-cache.outputs.cache-hit != 'true'-cache.outputs.cache-hit != 'true'
+        if: steps.restore-cache.outputs.cache-hit != 'true' || steps.restore-cypress-cache.outputs.cache-hit != 'true'
         uses: ./.github/actions/install-with-retries
         with:
           skip-cypress-binary: false
