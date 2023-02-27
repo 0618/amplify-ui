@@ -6,13 +6,10 @@ import {
 } from './util';
 
 /**
- * "uncaughtException" is to prevent Error: connect ECONNREFUSED
- * More details: https://stackoverflow.com/questions/14168433/node-js-error-connect-econnrefused
+ * Divide the sitePaths array to
+ * 1)prevent the socket hang up issue on local and
+ * 2) save time for testing
  */
-process.on('uncaughtException', function (err) {
-  console.log('ERROR::', err);
-});
-
 if (![3, 4].includes(process.argv.length)) {
   console.error('Expected 3 or 4 arguments!');
   process.exit(1);
@@ -20,7 +17,7 @@ if (![3, 4].includes(process.argv.length)) {
 
 const start = process.argv[2];
 const end = process.argv[3];
-const testPaths = end ? sitePaths.slice(+start, +end) : sitePaths.slice(+start); // Divide the sitePaths array to prevent the socket hang up issue.
+const testPaths = end ? sitePaths.slice(+start, +end) : sitePaths.slice(+start);
 
 async function main() {
   const allPagesPaths = await crawlAllLinksFromAllPages(testPaths);

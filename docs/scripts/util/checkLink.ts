@@ -1,6 +1,7 @@
 import https from 'https';
 import http from 'http';
 import { IGNORED_LINKS } from '../../src/data/ignoredLinks';
+import { sitePaths } from '../../src/data/sitePaths';
 
 const requestedUrl: Set<string> = new Set();
 export async function checkLink(
@@ -20,9 +21,13 @@ export async function checkLink(
   linkIdx: number
 ) {
   return new Promise(async (res, rej) => {
-    if (IGNORED_LINKS.includes(href) || requestedUrl.has(href)) {
+    if (
+      IGNORED_LINKS.includes(href) ||
+      sitePaths.includes(href) ||
+      requestedUrl.has(href)
+    ) {
       console.log(
-        `⏭[SKIPPING...] link #${linkIdx} ${href} from ${tagName} tag "${tagText}" on page #${pageIdx} ${pageUrl}, because it is on the IGNORED_LINKS list or have already requested.`
+        `⏭[SKIPPING...] link #${linkIdx} ${href} from ${tagName} tag "${tagText}" on page #${pageIdx} ${pageUrl}, because it is on the IGNORED_LINKS list, on the Sitemap, or have already requested.`
       );
       res(0);
     } else if (href.includes('https:')) {
