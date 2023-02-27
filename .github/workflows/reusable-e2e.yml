@@ -88,6 +88,11 @@ jobs:
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('yarn.lock') }}
+      - name: Cache Puppeteer
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/puppeteer
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
       - name: Cache packages/ui/dist
         uses: actions/cache@v3
         with:
@@ -100,11 +105,6 @@ jobs:
             ./node_modules
             **/node_modules
           key: ${{ runner.os }}-nodemodules-${{ inputs.commit }}
-      - name: Cache Puppeteer
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/puppeteer
-          key: ${{ runner.os }}-puppeteer-${{ inputs.commit }}
   unit:
     needs: setup
     runs-on: ubuntu-latest
@@ -389,6 +389,15 @@ jobs:
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
 
+      - name: Restore puppeteer cache
+        uses: actions/cache@v3
+        id: restore-puppeteer-cache
+        with:
+          path: ~/.cache/puppeteer
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
+        env:
+          SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
+
       - name: Restore node_modules cache
         uses: actions/cache@v3
         id: restore-cache
@@ -399,15 +408,6 @@ jobs:
           key: ${{ runner.os }}-nodemodules-${{ inputs.commit }}
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 3
-
-      # - name: Restore puppeteer cache
-      #   uses: actions/cache@v3
-      #   id: restore-cache
-      #   with:
-      #     path: ~/.cache/puppeteer
-      #     key: ${{ runner.os }}-puppeteer-${{ inputs.commit }}
-      #   env:
-      #     SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
 
       - name: Install packages
         if: steps.restore-cache.outputs.cache-hit != 'true' || steps.restore-cypress-cache.outputs.cache-hit != 'true'
@@ -423,9 +423,6 @@ jobs:
 
       - name: Build react package
         run: yarn react build
-
-      - name: Install puppeteer
-        run: yarn docs add -D puppeteer
 
       - name: Build docs package
         run: yarn docs build
