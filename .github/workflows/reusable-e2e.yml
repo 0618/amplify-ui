@@ -450,6 +450,7 @@ jobs:
         id: link-checker
 
       - name: Run E2E tests against docs
+        if: ${{ success() }}
         run: yarn workspace e2e test:theme
         id: e2e
         env:
