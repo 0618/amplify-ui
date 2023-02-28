@@ -79,7 +79,7 @@ jobs:
         id: restore-puppeteer-cache
         with:
           path: ~/.cache/puppeteer
-          key: ${{ runner.os }}-puppeteer-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
       - name: Install packages
@@ -103,7 +103,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/puppeteer
-          key: ${{ runner.os }}-puppeteer-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
       - name: Cache packages/ui/dist
         uses: actions/cache@v3
         with:
@@ -405,7 +405,7 @@ jobs:
         id: restore-puppeteer-cache
         with:
           path: ~/.cache/puppeteer
-          key: ${{ runner.os }}-puppeteer-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-puppeteer-${{ hashFiles('yarn.lock') }}
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
 
