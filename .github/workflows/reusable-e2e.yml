@@ -78,7 +78,7 @@ jobs:
         uses: actions/cache@v3
         id: restore-puppeteer-cache
         with:
-          path: ~/.cache/Cypress
+          path: ~/.cache/puppeteer
           key: ${{ runner.os }}-puppeteer-${{ hashFiles('**/yarn.lock') }}
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 1
