@@ -20,7 +20,7 @@ export async function crawlAllLinks(pages: string[]) {
 
     await page.goto(pageUrl, { waitUntil: 'networkidle2' });
     await page.waitForNetworkIdle({ idleTime: 1000 });
-    console.log(`🐝 [VISITING...] page #${pageIdx} ${pageUrl}`);
+    // console.log(`🐝 [VISITING...] page #${pageIdx} ${pageUrl}`);
     await page.setViewport({ width: 1080, height: 1024 });
     const links = await page.evaluate(() => {
       return Array.from(document.querySelectorAll('a')).map(

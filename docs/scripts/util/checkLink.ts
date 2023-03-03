@@ -26,9 +26,9 @@ export async function checkLink(
       );
       res(0);
     } else if (IGNORED_LINKS.includes(href) || requestedUrl.has(href)) {
-      console.log(
-        `⏭[SKIPPING...] page #${pageIdx} link #${linkIdx} ${href} from ${tagName} tag "${tagText}" on page ${pageUrl}, because it is on the IGNORED_LINKS list or have already requested.`
-      );
+      // console.log(
+      //   `⏭[SKIPPING...] page #${pageIdx} link #${linkIdx} ${href} from ${tagName} tag "${tagText}" on page ${pageUrl}, because it is on the IGNORED_LINKS list or have already requested.`
+      // );
       res(0);
     } else {
       const { get } = href.includes('https:') ? https : http;
@@ -49,9 +49,9 @@ export async function checkLink(
     href: string;
   }) {
     if ([200, 301, 303, 308].includes(statusCode)) {
-      console.log(
-        `↩️ [RETURNING STATUS...] ${statusCode} page #${pageIdx} link #${linkIdx} -- ${href} from ${tagName} tag "${tagText}" on page ${pageUrl}`
-      );
+      // console.log(
+      //   `↩️ [RETURNING STATUS...] ${statusCode} page #${pageIdx} link #${linkIdx} -- ${href} from ${tagName} tag "${tagText}" on page ${pageUrl}`
+      // );
 
       /**
        * If 308, check if it's a internal direction (see docs/next.config.js redirects logic)
@@ -64,9 +64,9 @@ export async function checkLink(
         const newHref = `${
           href.match(hostNameRegex)[0]
         }/${platform}${href.replace(hostNameRegex, '')}`;
-        console.log(
-          `🔁 [Redirecting...] link #${linkIdx} ${href} to ${newHref}`
-        );
+        // console.log(
+        //   `🔁 [Redirecting...] link #${linkIdx} ${href} to ${newHref}`
+        // );
         await checkLink(
           { href: newHref, tagName, tagText, pageIdx, pageUrl },
           linkIdx
