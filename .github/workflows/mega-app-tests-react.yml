@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - 'mega-app-canary'
+      - 'mega-app-canary-loadtest'
 
 jobs:
   build:
@@ -14,13 +15,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        framework: [react]
-        framework-version: [latest]
+        framework: [react, react]
+        framework-version: [latest, latest]
         build-tool: [cra, next, vite]
-        build-tool-version: [latest]
-        pkg-manager: [npm]
-        language: [ts]
-        node-version: [18]
+        build-tool-version: [latest, latest]
+        pkg-manager: [npm, npm]
+        language: [ts, ts]
+        node-version: [18, 18]
         include:
           - framework: react
             framework-version: latest
