@@ -49,6 +49,9 @@ echo -e "${BLUE_BOLD}Checking log file \"$LOG_FILE\" for errors...${RESET}"
 LINE_ERROR=false
 
 while read -r line; do
+  echo -e "⭐ ${GREEN_BOLE}Checking: $line ${RESET}"
+  echo -e "🔍 ${GREEN_BOLE}Checking: echo "$line" | grep -E '^(\[?([0-9]{2}:){2}[0-9]{2}\]?,?).*(Error|ERROR)' ${RESET}"
+  echo -e "🔍 $(echo "$line" | grep -E '^(\[?([0-9]{2}:){2}[0-9]{2}\]?,?).*(Error|ERROR)')"
   if [[ "$line" == "" ]]; then
     continue
   # Check if there's any line start with "NN:NN:NN," or "[NN:NN:NN]" (N is 0-9), and has "Error" or "ERROR".
