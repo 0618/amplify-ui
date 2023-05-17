@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# MEGA_APP_NAME=rnlatestClilatestNode18tsandroid
+# LOG_FILE=test.log
+
 echo "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
 cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
@@ -46,9 +49,10 @@ fi
 
 # Step 1: Check if all lines in the log file meet the criteria:
 echo -e "${BLUE_BOLD}Checking log file \"$LOG_FILE\" for errors...${RESET}"
-LINE_ERROR=false
+HAS_ERROR=false
 
 while read -r line; do
+  LINE_ERROR=false
   echo -e "⭐ ${GREEN_BOLE}Checking: $line ${RESET}"
   echo -e "🔍 ${GREEN_BOLE}Checking: echo "$line" | grep -E '^(\[?([0-9]{2}:){2}[0-9]{2}\]?,?).*(Error|ERROR)' ${RESET}"
   echo -e "🔍 $(echo "$line" | grep -E '^(\[?([0-9]{2}:){2}[0-9]{2}\]?,?).*(Error|ERROR)')"
@@ -58,6 +62,7 @@ while read -r line; do
   elif echo "$line" | grep -Eq '^(\[?([0-9]{2}:){2}[0-9]{2}\]?,?).*(Error|ERROR)'; then
     echo -e "${RED_BOLD}ERROR found:${RESET}"
     echo -e $line
+    echo -e "${RED_BOLD} 🌔 HAS_ERROR: ${HAS_ERROR} ${RESET}"
     LINE_ERROR=true
     # Check if there's any line start with "NN:NN:NN," or "[NN:NN:NN]" (N is 0-9), and has "fail".
   elif echo "$line" | grep -Eq '^(\[?([0-9]{2}:){2}[0-9]{2}\]?,?).*(fail)'; then
@@ -78,10 +83,14 @@ while read -r line; do
       break
     fi
   done
+  if [[ $LINE_ERROR == true ]]; then
+    HAS_ERROR=true
+  fi
 done <"$LOG_FILE"
 
 # Step 2: Errors found, show the file and exit with failure
-if [[ $LINE_ERROR == true ]]; then
+echo -e "${RED_BOLD} 🌔 STEP2: HAS_ERROR: ${HAS_ERROR} ${RESET}"
+if [[ $HAS_ERROR == true ]]; then
   echo -e "${RED_BOLD}Errors found in log file \"$LOG_FILE\":${RESET}"
   echo -e "${BLUE_BOLD}Full log:${RESET}"
   cat "$LOG_FILE"
