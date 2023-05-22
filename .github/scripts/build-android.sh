@@ -36,5 +36,11 @@ if [ $? -ne 0 ]; then
 fi
 
 # Run npm run android in the background for <time> seconds
+echo -e "${BLUE_BOLD}cd android${COLOR_END}"
+cd android
+echo -e "${BLUE_BOLD}./gradlew clean${COLOR_END}" # To prevent "installDebug FAILED" https://stackoverflow.com/a/54955869/12610324
+./gradlew clean
+echo -e "${BLUE_BOLD}cd ..${COLOR_END}"
+cd ..
 echo -e "${BLUE_BOLD}Running npm run android${COLOR_END}"
 npm run android
