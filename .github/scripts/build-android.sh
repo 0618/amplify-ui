@@ -5,11 +5,8 @@ LOG_FILE=$1
 # Define app name
 MEGA_APP_NAME=$2
 
-# Define the color codes
-BLUE_BOLD="\033[1;36m"
-GREEN_BOLD="\033[1;32m"
-RED_BOLD="\033[1;31m"
-COLOR_END="\033[0m"
+# Import log function
+source "../../../.github/scripts/log.sh"
 
 # To resolve "error Command failed: /Users/runner/Library/Android/sdk/platform-tools/adb logcat -c"
 # https://stackoverflow.com/questions/63617294/error-while-running-android-build-on-react-native
@@ -20,27 +17,27 @@ COLOR_END="\033[0m"
 # export PATH=$PATH:$ANDROID_HOME/tools/bin
 # export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-echo -e "${BLUE_BOLD}cd build-system-tests/mega-apps/${MEGA_APP_NAME}${COLOR_END}"
+log "command" "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
 cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
 # Log errors to LOG_FILE in the background
-echo -e "${BLUE_BOLD}Create ${LOG_FILE}${COLOR_END}"
+log "command" "touch $LOG_FILE"
 touch $LOG_FILE
-echo -e "${BLUE_BOLD}Logging errors to $LOG_FILE in the background${COLOR_END}"
+log "command" "npx react-native log-android >$LOG_FILE &"
 npx react-native log-android >$LOG_FILE &
 
 # Check if the command succeeded
 if [ $? -ne 0 ]; then
-  echo -e "${BLUE_BOLD}Failed to run command: npx react-native log-android > $LOG_FILE &${COLOR_END}"
+  log "error" "Failed to run command: npx react-native log-android > $LOG_FILE &"
   exit 1
 fi
 
-# Run npm run android in the background for <time> seconds
+# Run npm run android in the background
 echo -e "${BLUE_BOLD}cd android${COLOR_END}"
 cd android
 echo -e "${BLUE_BOLD}./gradlew clean${COLOR_END}" # To prevent "installDebug FAILED" https://stackoverflow.com/a/54955869/12610324
 ./gradlew clean
 echo -e "${BLUE_BOLD}cd ..${COLOR_END}"
 cd ..
-echo -e "${BLUE_BOLD}Running npm run android${COLOR_END}"
+log "command" "npm run android"
 npm run android
