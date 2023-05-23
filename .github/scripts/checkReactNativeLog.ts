@@ -1,16 +1,11 @@
-const fs = require('fs');
+import fs from 'fs';
+import { PromisePool } from '@supercharge/promise-pool';
 
-const sleep = (seconds) => {
-  const milliseconds = seconds * 1000;
-  const start = new Date().getTime();
-  while (true) {
-    if (new Date().getTime() - start > milliseconds) {
-      break;
-    }
-  }
+const sleep = (seconds: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 };
 
-const log = (type, message) => {
+const log = (type: string, message: string): void => {
   const colors = {
     blueBold: '\x1b[1;36m',
     greenBold: '\x1b[1;32m',
@@ -36,7 +31,7 @@ const log = (type, message) => {
       console.log(`${colors.blueBold}[RUN...] ${message}${colors.colorEnd}`);
       break;
     case 'info':
-      console.log(`${colors.blueBold}[INFO...] ${message}${colors.blueEnd}`);
+      console.log(`${colors.blueBold}[INFO...] ${message}${colors.colorEnd}`);
       break;
     default:
       console.log(message);
@@ -48,7 +43,10 @@ const log = (type, message) => {
  * checkStartMessage is a function that checks if the log file ONLY contains the starting message
  * If the log file ONLY contains the starting message, it means that the logging messages are not ready yet
  */
-const checkStartMessage = (logLines, logFile) => {
+const checkStartMessage = async (
+  logLines: string[],
+  logFile: string
+): Promise<void> => {
   const startMessages = [
     'info Starting logkitty',
     'React Native iOS Logger started for XCode project',
@@ -74,45 +72,47 @@ const checkStartMessage = (logLines, logFile) => {
  * checkErrorMessage is a function that checks if there is an error in the log file
  * @returns {boolean} hasError
  */
-const checkErrorMessage = (logLines) => {
+const checkErrorMessage = async (logLines: string[]): Promise<boolean> => {
   log('info', `Checking log file ${process.env.LOG_FILE} for errors...`);
 
-  let hasError = false;
-  for (const line of logLines) {
-    let isErrorLine = false;
-    const errorKeyWords = [
-      'Error',
-      'ERROR',
-      'fail',
-      'Could not connect to development server',
-    ];
-    const errorRegex = `(([0-9]{2}:){2}[0-9]{2},?).*(${errorKeyWords.join(
-      '|'
-    )})`;
+  const { results } = await PromisePool.withConcurrency(1)
+    .for(logLines)
+    .process(async (line) => {
+      let isErrorLine = false;
+      const errorKeyWords = [
+        'Error',
+        'ERROR',
+        'fail',
+        'Could not connect to development server',
+      ];
+      const errorRegex = `(([0-9]{2}:){2}[0-9]{2},?).*(${errorKeyWords.join(
+        '|'
+      )})`;
 
-    if (line.match(errorRegex)) {
-      log('error', 'Error found:');
-      log('error', line);
-      isErrorLine = true;
-    }
-
-    // Exceptions are errors that are not really errors
-    const exceptions = ['AuthError -'];
-    for (const exception of exceptions) {
-      if (line.includes(exception)) {
-        log('warning', 'Exception found:');
-        log('log', line);
-        console.warn(line);
-        isErrorLine = false;
-        break;
+      if (line.match(errorRegex)) {
+        log('error', 'Error found:');
+        log('error', line);
+        isErrorLine = true;
       }
-    }
-    hasError = hasError || isErrorLine;
-  }
-  return hasError;
+
+      // Exceptions are errors that are not really errors
+      const exceptions = ['AuthError -'];
+      for (const exception of exceptions) {
+        if (line.includes(exception)) {
+          log('warning', 'Exception found:');
+          log('log', line);
+          console.warn(line);
+          isErrorLine = false;
+          break;
+        }
+      }
+      return isErrorLine;
+    });
+
+  return results.some((result) => result === true);
 };
 
-const checkReactNativeLog = () => {
+const checkReactNativeLog = async (): Promise<void> => {
   log(
     'command',
     `cd build-system-tests/mega-apps/${process.env.MEGA_APP_NAME}`
@@ -122,15 +122,15 @@ const checkReactNativeLog = () => {
   // Wait for the logging messages to be ready. The number is based on real experiments in Github Actions.
   let timeToWait = process.env.PLATFORM === 'ios' ? 300 : 200;
 
-  log('info', `Sleep for'${timeToWait}'seconds...`);
-  sleep(timeToWait);
+  log('info', `Sleep for '${timeToWait}' seconds...`);
+  await sleep(timeToWait);
 
   const logFile = fs.readFileSync(process.env.LOG_FILE, 'utf-8');
   const logLines = logFile.split('\n').filter((line) => line !== '');
 
-  checkStartMessage(logLines, logFile);
+  await checkStartMessage(logLines, logFile);
 
-  let hasError = checkErrorMessage(logLines);
+  let hasError = await checkErrorMessage(logLines);
 
   if (hasError) {
     log('error', `Errors found in log file ${process.env.LOG_FILE}`);
@@ -142,13 +142,13 @@ const checkReactNativeLog = () => {
     log('info', 'Full log:');
     log('log', logFile);
     process.exit(1);
+  } else {
+    log('info', 'Full log:');
+    log('log', logFile);
+    log('success', `No errors found in log file ${process.env.LOG_FILE}`);
+
+    process.exit(0);
   }
-
-  log('info', 'Full log:');
-  log('log', logFile);
-  log('success', `No errors found in log file ${process.env.LOG_FILE}`);
-
-  process.exit(0);
 };
 
 checkReactNativeLog();
