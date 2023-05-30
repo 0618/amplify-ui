@@ -54,7 +54,7 @@ fi
 if [[ "$FRAMEWORK" == 'react-native' ]]; then
     echo "rm -rf $MEGA_APP_NAME" # Remove $MEGA_APP_NAME if it exists
     rm -rf $MEGA_APP_NAME
-    if [["$BUILD_TOOL" == 'cli']]; then
+    if [[ "$BUILD_TOOL" == 'cli' ]]; then
         echo "npx react-native@${BUILD_TOOL_VERSION} init $MEGA_APP_NAME --version $FRAMEWORK_VERSION"
         npx react-native@${BUILD_TOOL_VERSION} init $MEGA_APP_NAME --version $FRAMEWORK_VERSION
         # React-Native, since 0.71.8,
