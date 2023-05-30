@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         framework-version: [latest]
-        build-tool: [cli]
+        build-tool: [cli, expo]
         build-tool-version: [latest]
         pkg-manager: [npm]
         language: [ts]
