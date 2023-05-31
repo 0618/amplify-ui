@@ -47,7 +47,7 @@ const checkStartMessage = async (
       if (logLines[0].includes(startMessage)) {
         log(
           'error',
-          'Failed to get the logging messages. Please increase TIME_TO_WAIT.'
+          'Failed to get the logging messages. Please increase `timeToWait`.'
         );
         log('info', 'Log file:');
         log('log', logFile);
@@ -109,7 +109,7 @@ const checkReactNativeLog = async (): Promise<void> => {
   process.chdir(`build-system-tests/mega-apps/${process.env.MEGA_APP_NAME}`);
 
   // Wait for the logging messages to be ready. The number is based on real experiments in Github Actions.
-  let timeToWait = process.env.PLATFORM === 'ios' ? 300 : 200;
+  let timeToWait = process.env.PLATFORM === 'android' ? 200 : 300;
 
   log('info', `Sleep for '${timeToWait}' seconds...`);
   await sleep(timeToWait);
