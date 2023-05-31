@@ -30,4 +30,4 @@ npm start &
 log "command" "npx pod-install" # To prevent "AsyncStorage is null." https://react-native-async-storage.github.io/async-storage/docs/install/
 npx pod-install
 log "command" "npm run ios"
-npm run ios
+npx expo start --ios -p 19001
