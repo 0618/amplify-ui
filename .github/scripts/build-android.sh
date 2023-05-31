@@ -14,8 +14,6 @@ log "command" "pwd"
 pwd
 log "command" "ls -al"
 ls -al
-log "command" "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
-cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
 # Log errors to LOG_FILE in the background
 log "command" "touch $LOG_FILE"
@@ -37,6 +35,9 @@ if [ $BUILD_TOOL == 'cli' ]; then
   ./gradlew clean
   log "command" "cd .."
   cd ..
+elif [ $BUILD_TOOL == 'expo' ]; then
+  log "command" "npm install expo-cli"
+  npm install expo-cli
 fi
 log "command" "npm run android"
 npm run android

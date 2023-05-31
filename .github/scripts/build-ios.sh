@@ -12,8 +12,6 @@ log "command" "pwd"
 pwd
 log "command" "ls -al"
 ls -al
-log "command" "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
-cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
 # Step 1: Log errors to LOG_FILE in the background
 log "command" "touch $LOG_FILE"
