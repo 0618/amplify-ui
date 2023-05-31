@@ -10,6 +10,10 @@ BUILD_TOOL=$3
 # Import log function
 source "../../../.github/scripts/log.sh"
 
+log "command" "pwd"
+pwd
+log "command" "ls -al"
+ls -al
 log "command" "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
 cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
