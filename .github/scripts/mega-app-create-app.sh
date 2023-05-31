@@ -67,5 +67,9 @@ if [[ "$FRAMEWORK" == 'react-native' ]]; then
     elif [[ "$BUILD_TOOL" == 'expo' ]]; then
         echo "npx create-expo-app $MEGA_APP_NAME --template expo-template-blank-typescript"
         npx create-expo-app $MEGA_APP_NAME --template expo-template-blank-typescript
+        echo "cd $MEGA_APP_NAME"
+        cd $MEGA_APP_NAME
+        echo "cat package.json" # Log the package.json to check the expo version should be later than 48.0.19
+        cat package.json
     fi
 fi

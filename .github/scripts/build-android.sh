@@ -35,9 +35,7 @@ if [ $BUILD_TOOL == 'cli' ]; then
   ./gradlew clean
   log "command" "cd .."
   cd ..
-elif [ $BUILD_TOOL == 'expo' ]; then
-  log "command" "npm install expo-cli"
-  npm install expo-cli
 fi
+
 log "command" "npm run android"
 npm run android
