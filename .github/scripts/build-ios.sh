@@ -4,6 +4,8 @@
 LOG_FILE=$1
 # Define app name
 MEGA_APP_NAME=$2
+# Define build tool
+BUILD_TOOL=$3
 
 # Import log function
 source "../../../.github/scripts/log.sh"
@@ -30,4 +32,8 @@ npm start &
 log "command" "npx pod-install" # To prevent "AsyncStorage is null." https://react-native-async-storage.github.io/async-storage/docs/install/
 npx pod-install
 log "command" "npm run ios"
-npx expo start --ios -p 19001
+if [ $BUILD_TOOL == 'expo' ]; then
+  npx expo start --ios -p 19001
+else
+  npm run ios
+fi

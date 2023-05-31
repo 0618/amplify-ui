@@ -4,7 +4,7 @@
 LOG_FILE=$1
 # Define app name
 MEGA_APP_NAME=$2
-
+# Define build tool
 BUILD_TOOL=$3
 
 # Import log function
