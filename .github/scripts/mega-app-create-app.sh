@@ -64,8 +64,8 @@ if [[ "$FRAMEWORK" == 'react-native' ]]; then
         cd $MEGA_APP_NAME
         echo "cat package.json"
         cat package.json
-    else
-        echo "npx create-expo-app $MEGA_APP_NAME"
-        npx create-expo-app $MEGA_APP_NAME
+    elif [[ "$BUILD_TOOL" == 'expo' ]]; then
+        echo "npx create-expo-app $MEGA_APP_NAME --template expo-template-blank-typescript"
+        npx create-expo-app $MEGA_APP_NAME --template expo-template-blank-typescript
     fi
 fi

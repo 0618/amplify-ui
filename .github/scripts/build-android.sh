@@ -5,6 +5,8 @@ LOG_FILE=$1
 # Define app name
 MEGA_APP_NAME=$2
 
+BUILD_TOOL=$3
+
 # Import log function
 source "../../../.github/scripts/log.sh"
 
@@ -24,11 +26,13 @@ if [ $? -ne 0 ]; then
 fi
 
 # Run npm run android in the background
-log "command" "cd android"
-cd android
-log "command" "./gradlew clean" # To prevent "installDebug FAILED" https://stackoverflow.com/a/54955869/12610324
-./gradlew clean
-log "command" "cd .."
-cd ..
+if [ $BUILD_TOOL == 'cli' ]; then
+  log "command" "cd android"
+  cd android
+  log "command" "./gradlew clean" # To prevent "installDebug FAILED" https://stackoverflow.com/a/54955869/12610324
+  ./gradlew clean
+  log "command" "cd .."
+  cd ..
+fi
 log "command" "npm run android"
 npm run android
