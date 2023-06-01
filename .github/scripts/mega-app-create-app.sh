@@ -71,5 +71,7 @@ if [[ "$FRAMEWORK" == 'react-native' ]]; then
         cd $MEGA_APP_NAME
         echo "cat package.json" # Log the package.json to check the expo version should be later than 48.0.19
         cat package.json
+        echo "npx expo-env-info"
+        npx expo-env-info
     fi
 fi
