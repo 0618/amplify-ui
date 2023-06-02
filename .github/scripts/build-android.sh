@@ -30,7 +30,7 @@ fi
 # Run npm run android in the background
 if [ $BUILD_TOOL == 'expo' ]; then
   log "command" "npm run android"
-  npm run android &
+  npm run android
 else
   log "command" "cd android"
   cd android
