@@ -101,7 +101,7 @@ if [[ "$FRAMEWORK" == "react-native" ]]; then
         echo "cp templates/template-react-native-aws-exports.js mega-apps/${MEGA_APP_NAME}/aws-exports.js"
         cp templates/template-react-native-aws-exports.js mega-apps/${MEGA_APP_NAME}/aws-exports.js
     elif [[ "$BUILD_TOOL" == 'expo' ]]; then
-        echo "cp templates/template-aws-exports.js mega-apps/${MEGA_APP_NAME}/src/aws-exports.js"
-        cp templates/template-aws-exports.js mega-apps/${MEGA_APP_NAME}/src/aws-exports.js
+        echo "cp templates/template-aws-exports.js mega-apps/${MEGA_APP_NAME}/aws-exports.js"
+        cp templates/template-aws-exports.js mega-apps/${MEGA_APP_NAME}/aws-exports.js
     fi
 fi
