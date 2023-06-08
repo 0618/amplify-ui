@@ -82,6 +82,8 @@ fi
 if [[ "$FRAMEWORK" == 'vue' ]]; then
     echo "cp templates/components/vue/App.vue mega-apps/${MEGA_APP_NAME}/src/App.vue"
     cp templates/components/vue/App.vue mega-apps/${MEGA_APP_NAME}/src/App.vue
+    echo "cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/src/aws-exports.js"
+    cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/src/aws-exports.js
 
     # See Troubleshooting: https://ui.docs.amplify.aws/vue/getting-started/troubleshooting
     if [[ "$BUILD_TOOL" == 'vite' ]]; then
