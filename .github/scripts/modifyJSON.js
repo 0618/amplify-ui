@@ -15,7 +15,7 @@ if (!file || !option) {
 }
 
 // Read the JSON file
-const data: string = fs.readFileSync(file, 'utf8');
+const data = fs.readFileSync(file, 'utf8');
 const strippedData = removeComments(data);
 let json = JSON.parse(strippedData);
 
