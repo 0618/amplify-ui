@@ -4,10 +4,16 @@ echo "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
 cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
 if [ "$FRAMEWORK" == 'react' ]; then
-    echo "\$DEPENDENCIES='\$DEPENDENCIES react-dom@$FRAMEWORK_VERSION @aws-amplify/ui-react-storage @aws-amplify/ui-react-geo @aws-amplify/ui-react-notifications'"
+    # add react-dom
+    echo "DEPENDENCIES='\$DEPENDENCIES react-dom@$FRAMEWORK_VERSION @aws-amplify/ui-react-storage @aws-amplify/ui-react-geo @aws-amplify/ui-react-notifications'"
     DEPENDENCIES="$DEPENDENCIES react-dom@$FRAMEWORK_VERSION @aws-amplify/ui-react-storage @aws-amplify/ui-react-geo @aws-amplify/ui-react-notifications"
-    echo "Dependencies to be installed: $DEPENDENCIES"
+elif [ "$FRAMEWORK" == 'angular' ]; then
+    # remove angular
+    echo "DEPENDENCIES="@aws-amplify/ui-$FRAMEWORK aws-amplify""
+    DEPENDENCIES="@aws-amplify/ui-$FRAMEWORK aws-amplify"
 fi
+
+echo "Dependencies to be installed: $DEPENDENCIES"
 
 if [ "$PKG_MANAGER" == 'yarn' ]; then
     echo "yarn version"
@@ -57,6 +63,7 @@ else
             echo "ng build my-amplify-ui-lib"
             ng build my-amplify-ui-lib
         fi
+
         echo "npm install $DEPENDENCIES"
         npm install $DEPENDENCIES
 
