@@ -62,10 +62,10 @@ else
             npm install $DEPENDENCIES
             echo "ng build my-amplify-ui-lib"
             ng build my-amplify-ui-lib
+        else
+            echo "npm install $DEPENDENCIES"
+            npm install $DEPENDENCIES
         fi
-
-        echo "npm install $DEPENDENCIES"
-        npm install $DEPENDENCIES
 
         if [[ "$FRAMEWORK" == 'angular' ]]; then
             echo "rm -rf node_modules package-lock.json"
