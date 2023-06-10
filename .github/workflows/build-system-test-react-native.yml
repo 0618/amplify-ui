@@ -117,16 +117,8 @@ jobs:
           $ANDROID_HOME/platform-tools/adb shell settings put global animator_duration_scale 0.0
 
       - name: Create MegaApp ${{ env.MEGA_APP_NAME }}
-        run: ./.github/scripts/mega-app-create-app.sh
+        run: ./.github/scripts/mega-app-create-app.sh --build-tool ${{ matrix.build-tool }} --build-tool-version ${{ matrix.build-tool-version }} --language ${{ matrix.language }} --name ${{ env.MEGA_APP_NAME }} --framework ${{ matrix.framework }} --framework-version ${{ matrix.framework-version }}
         shell: bash
-        env:
-          FRAMEWORK: react-native
-          FRAMEWORK_VERSION: ${{ matrix.framework-version }}
-          BUILD_TOOL: ${{ matrix.build-tool }}
-          LANGUAGE: ${{ matrix.language }}
-          MEGA_APP_NAME: ${{ env.MEGA_APP_NAME }}
-          BUILD_TOOL_VERSION: ${{ matrix.build-tool-version }}
-          PLATFORM: ${{ matrix.platform }}
       - name: Copy aws_export and App.js
         run: ./.github/scripts/mega-app-copy-files.sh
         shell: bash
