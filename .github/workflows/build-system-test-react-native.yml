@@ -16,6 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        framework: [react-native]
         framework-version: [latest]
         build-tool: [cli, expo]
         build-tool-version: [latest]
