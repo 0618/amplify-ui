@@ -3,7 +3,7 @@
 # Default values
 BUILD_TOOL="cra"
 BUILD_TOOL_VERSION="latest"
-LANGUAGE="js"
+LANGUAGE="ts"
 MEGA_APP_NAME=""
 FRAMEWORK="react"
 FRAMEWORK_VERSION="latest"
