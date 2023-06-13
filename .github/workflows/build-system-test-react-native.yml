@@ -124,21 +124,13 @@ jobs:
         run: ./.github/scripts/mega-app-copy-files.sh --build-tool ${{ matrix.build-tool }} --build-tool-version ${{ matrix.build-tool-version }} --language ${{ matrix.language }} --name ${{ env.MEGA_APP_NAME }} --framework ${{ matrix.framework }} --framework-version ${{ matrix.framework-version }}
         shell: bash
 
-      - name: Install Packages and Build
-        run: ./.github/scripts/mega-app-install-build.sh
+      - name: Install Packages
+        run: ./.github/scripts/mega-app-install.sh --build-tool ${{ matrix.build-tool }} --build-tool-version ${{ matrix.build-tool-version }} --language ${{ matrix.language }} --name ${{ env.MEGA_APP_NAME }} --framework ${{ matrix.framework }} --framework-version ${{ matrix.framework-version }} --pkg-manager ${{ matrix.pkg-manager }} --pkg-manager-version ${{ matrix.pkg-manager-version }}
         shell: bash
-        env:
-          BUILD_TOOL: ${{ matrix.build-tool }}
-          BUILD_TOOL_VERSION: ${{ matrix.build-tool-version }}
-          LANGUAGE: ${{ matrix.language }}
-          MEGA_APP_NAME: ${{ env.MEGA_APP_NAME }}
-          PKG_MANAGER: ${{ matrix.pkg-manager }}
-          DEPENDENCIES: ${{ env.DEPENDENCIES }}
-          DEP_TYPES: ${{ env.DEP_TYPES }}
-          FRAMEWORK: react-native
-          FRAMEWORK_VERSION: ${{ matrix.framework-version }}
-          PLATFORM: ${{ matrix.platform }}
-          LOG_FILE: ${{ matrix.logfile }}
+
+      - name: Build MegaApp ${{ env.MEGA_APP_NAME }}
+        run: ./.github/scripts/mega-app-build.sh --build-tool ${{ matrix.build-tool }} --build-tool-version ${{ matrix.build-tool-version }} --language ${{ matrix.language }} --name ${{ env.MEGA_APP_NAME }} --framework ${{ matrix.framework }} --framework-version ${{ matrix.framework-version }} --pkg-manager ${{ matrix.pkg-manager }} --pkg-manager-version ${{ matrix.pkg-manager-version }}
+        shell: bash
       - name: Detect Mega App Error in Log
         run: node --require esbuild-register .github/scripts/checkReactNativeLog.ts
         env:
@@ -148,7 +140,7 @@ jobs:
           PKG_MANAGER: ${{ matrix.pkg-manager }}
           DEPENDENCIES: ${{ env.DEPENDENCIES }}
           DEP_TYPES: ${{ env.DEP_TYPES }}
-          FRAMEWORK: react-native
+          FRAMEWORK: ${{ matrix.framework }}
           FRAMEWORK_VERSION: ${{ matrix.framework-version }}
           PLATFORM: ${{ matrix.platform }}
           LOG_FILE: ${{ matrix.logfile }}
