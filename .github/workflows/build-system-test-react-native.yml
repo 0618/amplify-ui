@@ -126,10 +126,9 @@ jobs:
 
       - name: Install Packages
         run: ./.github/scripts/mega-app-install.sh --build-tool ${{ matrix.build-tool }} --build-tool-version ${{ matrix.build-tool-version }} --language ${{ matrix.language }} --name ${{ env.MEGA_APP_NAME }} --framework ${{ matrix.framework }} --framework-version ${{ matrix.framework-version }} --pkg-manager ${{ matrix.pkg-manager }} --pkg-manager-version ${{ matrix.pkg-manager-version }}
-        shell: bash
 
       - name: Build MegaApp ${{ env.MEGA_APP_NAME }}
-        run: ./.github/scripts/mega-app-build.sh --build-tool ${{ matrix.build-tool }} --build-tool-version ${{ matrix.build-tool-version }} --language ${{ matrix.language }} --name ${{ env.MEGA_APP_NAME }} --framework ${{ matrix.framework }} --framework-version ${{ matrix.framework-version }} --pkg-manager ${{ matrix.pkg-manager }} --pkg-manager-version ${{ matrix.pkg-manager-version }}
+        run: ./.github/scripts/mega-app-build.sh --build-tool ${{ matrix.build-tool }} --build-tool-version ${{ matrix.build-tool-version }} --language ${{ matrix.language }} --name ${{ env.MEGA_APP_NAME }} --framework ${{ matrix.framework }} --framework-version ${{ matrix.framework-version }} --pkg-manager ${{ matrix.pkg-manager }} --pkg-manager-version ${{ matrix.pkg-manager-version }} --platform ${{ matrix.platform }}
         shell: bash
       - name: Detect Mega App Error in Log
         run: node --require esbuild-register .github/scripts/checkReactNativeLog.ts
