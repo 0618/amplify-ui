@@ -82,10 +82,8 @@ fi
 # Start Mega App Build #
 ########################
 
-echo $PLATFORM
-
-# echo "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
-# cd build-system-tests/mega-apps/${MEGA_APP_NAME}
+echo "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
+cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
 if [ "$PKG_MANAGER" == 'yarn' ]; then
     echo "yarn build"
