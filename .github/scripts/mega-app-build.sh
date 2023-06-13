@@ -13,7 +13,7 @@ LOG_FILE="test.log"
 # Options
 # e.g.
 # $ ./mega-app-build.sh --build-tool react --build-tool-version latest --language typescript --name react-latest-cra-latest-node-18-ts --framework cra --framework-version latest --pkg-manager npm
-# $ ./mega-app-build.sh -bt react -btr latest -lang typescript -n react-latest-cra-latest-node-18-ts -fw cra -fwv latest -pm npm -pmv latest
+# $ ./mega-app-build.sh -bt react -btr latest -lang typescript -n react-latest-cra-latest-node-18-ts -fw cra -fwv latest -pm npm
 # $ ./mega-app-build.sh -n react-latest-cra-latest-node-18-ts
 
 while [[ $# -gt 0 ]]; do
@@ -46,10 +46,6 @@ while [[ $# -gt 0 ]]; do
         PKG_MANAGER=$2
         shift
         ;;
-    -pmv | --pkg-manager-version)
-        PKG_MANAGER_VERSION=$2
-        shift
-        ;;
     -p | --platform)
         PLATFORM=$2
         shift
@@ -64,7 +60,6 @@ while [[ $# -gt 0 ]]; do
         echo "  -fw, --framework             Specify the framework: react, angular, vue, react-native (default: react)"
         echo "  -fwv, --framework-version    Specify the framework version (default: latest)"
         echo "  -pm, --pkg-manager           Specify the package manager: npm, yarn (default: npm)"
-        echo "  -pmv, --pkg-manager-version  Specify the package manager version (default: latest)"
         echo "  -p, --platform               Specify the platform: android, ios (default: android)"
         echo "  -h, --help                 Show help message"
         exit 0
