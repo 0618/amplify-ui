@@ -23,6 +23,7 @@ jobs:
         pkg-manager: [npm]
         language: [ts]
         node-version: [18]
+        pkg-manager-version: [latest]
         include:
           - framework: react
             framework-version: latest

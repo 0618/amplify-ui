@@ -25,6 +25,7 @@ jobs:
         node-version: [18]
         platform: [ios, android]
         logfile: [test.log]
+        pkg-manager-version: [latest]
         exclude:
           - build-tool: expo
             platform: ios

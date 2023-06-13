@@ -12,8 +12,8 @@ LOG_FILE="test.log"
 
 # Options
 # e.g.
-# $ ./mega-app-build.sh --build-tool react --build-tool-version latest --language typescript --name react-latest-cra-latest-node-18-ts --framework cra --framework-version latest --pkg-manager npm --pkg-manager-version latest --platform android
-# $ ./mega-app-build.sh -bt react -btr latest -lang typescript -n react-latest-cra-latest-node-18-ts -fw cra -fwv latest -pm npm -pmv latest -p android
+# $ ./mega-app-build.sh --build-tool react --build-tool-version latest --language typescript --name react-latest-cra-latest-node-18-ts --framework cra --framework-version latest --pkg-manager npm
+# $ ./mega-app-build.sh -bt react -btr latest -lang typescript -n react-latest-cra-latest-node-18-ts -fw cra -fwv latest -pm npm -pmv latest
 # $ ./mega-app-build.sh -n react-latest-cra-latest-node-18-ts
 
 while [[ $# -gt 0 ]]; do
@@ -87,8 +87,10 @@ fi
 # Start Mega App Build #
 ########################
 
-echo "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
-cd build-system-tests/mega-apps/${MEGA_APP_NAME}
+echo $PLATFORM
+
+# echo "cd build-system-tests/mega-apps/${MEGA_APP_NAME}"
+# cd build-system-tests/mega-apps/${MEGA_APP_NAME}
 
 if [ "$PKG_MANAGER" == 'yarn' ]; then
     echo "yarn build"
