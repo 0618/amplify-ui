@@ -11,6 +11,7 @@
     "mega:react-latest-next-latest-ts": "npm run create:react-latest-next-latest-ts && npm run copy:react-latest-next-latest-ts && npm run install:react-latest-next-latest-ts && npm run build:react-latest-next-latest-ts",
     "mega:react-latest-vite-latest-ts": "npm run create:react-latest-vite-latest-ts && npm run copy:react-latest-vite-latest-ts && npm run install:react-latest-vite-latest-ts && npm run build:react-latest-vite-latest-ts",
     "mega:react-16-cra-latest-ts": "npm run create:react-16-cra-latest-ts && npm run copy:react-16-cra-latest-ts && npm run install:react-16-cra-latest-ts && npm run build:react-16-cra-latest-ts",
+    "mega:react-latest-cra-latest-js": "npm run create:react-latest-cra-latest-js && npm run copy:react-latest-cra-latest-js && npm run install:react-latest-cra-latest-js && npm run build:react-latest-cra-latest-js",
     "create:react-latest-cra-latest-ts": "./scripts/mega-app-create-app.sh ${npm_package_config_REACT_LATEST_CRA_LATEST_TS}",
     "copy:react-latest-cra-latest-ts": "./scripts/mega-app-copy-files.sh ${npm_package_config_REACT_LATEST_CRA_LATEST_TS}",
     "install:react-latest-cra-latest-ts": "./scripts/mega-app-install.sh ${npm_package_config_REACT_LATEST_CRA_LATEST_TS} --pkg-manager npm --pkg-manager-version latest",
@@ -26,12 +27,17 @@
     "create:react-16-cra-latest-ts": "./scripts/mega-app-create-app.sh ${npm_package_config_REACT_16_CRA_LATEST_TS}",
     "copy:react-16-cra-latest-ts": "./scripts/mega-app-copy-files.sh ${npm_package_config_REACT_16_CRA_LATEST_TS}",
     "install:react-16-cra-latest-ts": "./scripts/mega-app-install.sh ${npm_package_config_REACT_16_CRA_LATEST_TS} --pkg-manager npm --pkg-manager-version latest",
-    "build:react-16-cra-latest-ts": "./scripts/mega-app-build.sh ${npm_package_config_REACT_16_CRA_LATEST_TS} --pkg-manager npm"
+    "build:react-16-cra-latest-ts": "./scripts/mega-app-build.sh ${npm_package_config_REACT_16_CRA_LATEST_TS} --pkg-manager npm",
+    "create:react-latest-cra-latest-js": "./scripts/mega-app-create-app.sh ${npm_package_config_REACT_LATEST_CRA_LATEST_JS}",
+    "copy:react-latest-cra-latest-js": "./scripts/mega-app-copy-files.sh ${npm_package_config_REACT_LATEST_CRA_LATEST_JS}",
+    "install:react-latest-cra-latest-js": "./scripts/mega-app-install.sh ${npm_package_config_REACT_LATEST_CRA_LATEST_JS} --pkg-manager npm --pkg-manager-version latest",
+    "build:react-latest-cra-latest-js": "./scripts/mega-app-build.sh ${npm_package_config_REACT_LATEST_CRA_LATEST_JS} --pkg-manager npm"
   },
   "config": {
     "REACT_LATEST_CRA_LATEST_TS": "--build-tool cra --build-tool-version latest --language ts --name react-latest-cra-latest-ts --framework react --framework-version latest",
     "REACT_LATEST_NEXT_LATEST_TS": "--build-tool next --build-tool-version latest --language ts --name react-latest-next-latest-ts --framework react --framework-version latest",
     "REACT_LATEST_VITE_LATEST_TS": "--build-tool vite --build-tool-version latest --language ts --name react-latest-vite-latest-ts --framework react --framework-version latest",
-    "REACT_16_CRA_LATEST_TS": "--build-tool cra --build-tool-version latest --language ts --name react-16-cra-latest-ts --framework react --framework-version 16"
+    "REACT_16_CRA_LATEST_TS": "--build-tool cra --build-tool-version latest --language ts --name react-16-cra-latest-ts --framework react --framework-version 16",
+    "REACT_LATEST_CRA_LATEST_JS": "--build-tool cra --build-tool-version latest --language js --name react-latest-cra-latest-js --framework react --framework-version latest"
   }
 }
