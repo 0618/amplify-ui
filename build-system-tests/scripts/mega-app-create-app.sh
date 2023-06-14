@@ -77,19 +77,24 @@ mkdir -p mega-apps/
 echo "cd mega-apps"
 cd mega-apps
 
+# Create a blank package.json
+# Otherwise mega-apps will be automatically created in build-system-tests/ folder even if we cd into mega-apps/ folder.
+echo "touch package.json"
+touch package.json
+
 if [[ "$BUILD_TOOL" == 'cra' && "$LANGUAGE" == 'js' ]]; then
-    echo "npx create-react-app mega-apps/${MEGA_APP_NAME}"
-    npx create-react-app mega-apps/${MEGA_APP_NAME}
+    echo "npx create-react-app ${MEGA_APP_NAME}"
+    npx create-react-app ${MEGA_APP_NAME}
 fi
 
 if [[ "$BUILD_TOOL" == 'cra' && "$LANGUAGE" == 'ts' ]]; then
-    echo "npx create-react-app mega-apps/${MEGA_APP_NAME} --template typescript"
-    npx create-react-app mega-apps/${MEGA_APP_NAME} --template typescript
+    echo "npx create-react-app ${MEGA_APP_NAME} --template typescript"
+    npx create-react-app ${MEGA_APP_NAME} --template typescript
 fi
 
 if [ "$BUILD_TOOL" == 'next' ]; then
-    echo "npx create-next-app mega-apps/${MEGA_APP_NAME} --ts --no-src-dir --no-experimental-app --no-eslint --no-app"
-    npx create-next-app mega-apps/${MEGA_APP_NAME} --ts --no-src-dir --no-experimental-app --no-eslint --no-app
+    echo "npx create-next-app ${MEGA_APP_NAME} --ts --no-src-dir --no-experimental-app --no-eslint --no-app"
+    npx create-next-app ${MEGA_APP_NAME} --ts --no-src-dir --no-experimental-app --no-eslint --no-app
 fi
 
 if [ "$BUILD_TOOL" == 'vite' ]; then
