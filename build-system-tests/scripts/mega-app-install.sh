@@ -54,14 +54,14 @@ while [[ $# -gt 0 ]]; do
         echo "Usage: mega-app-create-app.sh [OPTIONS]"
         echo "Options:"
         echo "  -B, --build-tool            Specify the build tool: cra, next, vite, angular-cli, vue-cli, nuxt, react-native-cli, expo. (default: cra)"
-        echo "  -b, --build-tool-version   Specify the build tool version (default: latest)"
-        echo "  -l, --language            Specify the language: js, ts (default: js)"
-        echo "  -n, --name                   Specify the mega app name (required)"
+        echo "  -b, --build-tool-version    Specify the build tool version (default: latest)"
+        echo "  -l, --language              Specify the language: js, ts (default: js)"
+        echo "  -n, --name                  Specify the mega app name (required)"
         echo "  -F, --framework             Specify the framework: react, angular, vue, react-native (default: react)"
-        echo "  -f, --framework-version    Specify the framework version (default: latest)"
+        echo "  -f, --framework-version     Specify the framework version (default: latest)"
         echo "  -P, --pkg-manager           Specify the package manager: npm, yarn (default: npm)"
-        echo "  -p, --pkg-manager-version  Specify the package manager version (default: latest)"
-        echo "  -h, --help                 Show help message"
+        echo "  -p, --pkg-manager-version   Specify the package manager version (default: latest)"
+        echo "  -h, --help                  Show help message"
         exit 0
         ;;
     *)
@@ -74,8 +74,7 @@ done
 
 # Check if MEGA_APP_NAME is provided
 if [[ -z "$MEGA_APP_NAME" ]]; then
-    echo "Please provide a name for the mega app using the -n or --name option."
-    exit 1
+    MEGA_APP_NAME="$FRAMEWORK-$FRAMEWORK_VERSION-$BUILD_TOOL-$BUILD_TOOL_VERSION-$LANGUAGE"
 fi
 
 ##########################

@@ -62,8 +62,7 @@ done
 
 # Check if MEGA_APP_NAME is provided
 if [[ -z "$MEGA_APP_NAME" ]]; then
-    echo "Please provide a name for the mega app using the -n or --name option."
-    exit 1
+    MEGA_APP_NAME="$FRAMEWORK-$FRAMEWORK_VERSION-$BUILD_TOOL-$BUILD_TOOL_VERSION-$LANGUAGE"
 fi
 
 ###########################
