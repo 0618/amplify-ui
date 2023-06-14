@@ -10,6 +10,7 @@
     "setup:react": "./scripts/setup-mega-app.sh",
     "react-latest-cra-latest-ts": "npm run setup:react",
     "react-latest-next-latest-ts": "npm run setup:react -- -B next",
+    "react-latest-vite-latest-ts": "npm run setup:react -- -B vite",
     "mega:react-latest-cra-latest-ts": "npm run create:react-latest-cra-latest-ts && npm run copy:react-latest-cra-latest-ts && npm run install:react-latest-cra-latest-ts && npm run build:react-latest-cra-latest-ts",
     "mega:react-latest-next-latest-ts": "npm run create:react-latest-next-latest-ts && npm run copy:react-latest-next-latest-ts && npm run install:react-latest-next-latest-ts && npm run build:react-latest-next-latest-ts",
     "mega:react-latest-vite-latest-ts": "npm run create:react-latest-vite-latest-ts && npm run copy:react-latest-vite-latest-ts && npm run install:react-latest-vite-latest-ts && npm run build:react-latest-vite-latest-ts",
