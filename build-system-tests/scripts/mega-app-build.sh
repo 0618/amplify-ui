@@ -82,11 +82,6 @@ fi
 # Start Mega App Build #
 ########################
 
-# remove the blanck package.json created by create-mega-app.sh.
-# Otherwise, the build will fail.
-echo "rm ./mega-apps/package.json"
-rm ./mega-apps/package.json
-
 echo "cd ./mega-apps/${MEGA_APP_NAME}"
 cd ./mega-apps/${MEGA_APP_NAME}
 

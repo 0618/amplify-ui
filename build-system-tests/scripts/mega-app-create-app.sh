@@ -79,8 +79,8 @@ cd mega-apps
 
 # Create a blank package.json
 # Otherwise mega-apps will be automatically created in build-system-tests/ folder even if we cd into mega-apps/ folder.
-echo "touch package.json"
-touch package.json
+echo "echo "{}" >package.json"
+echo "{}" >package.json
 
 if [[ "$BUILD_TOOL" == 'cra' && "$LANGUAGE" == 'js' ]]; then
     echo "npx create-react-app ${MEGA_APP_NAME}"
