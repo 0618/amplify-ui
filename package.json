@@ -24,7 +24,6 @@
     "vue-example": "yarn workspace @aws-amplify/ui-vue-example",
     "e2e": "yarn workspace @aws-amplify/ui-e2e",
     "build-system-tests": "yarn workspace @aws-amplify/ui-build-system-tests",
-    "environments": "yarn workspace @aws-amplify/ui-environments",
     "license": "node scripts/licenseChecker.js",
     "test": "yarn ui test && yarn react-core test && yarn react test && yarn react-native test && yarn e2e test",
     "prepare": "husky install",
@@ -42,7 +41,6 @@
   },
   "workspaces": {
     "packages": [
-      "build-system-tests",
       "docs",
       "environments",
       "examples/*",
