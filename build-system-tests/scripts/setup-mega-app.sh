@@ -78,9 +78,9 @@ if [[ -z "$MEGA_APP_NAME" ]]; then
   MEGA_APP_NAME="$FRAMEWORK-$FRAMEWORK_VERSION-$BUILD_TOOL-$BUILD_TOOL_VERSION-$LANGUAGE"
 fi
 
-##################
-# Setup Mega App #
-##################
+echo "##################"
+echo "# Setup Mega App #"
+echo "##################"
 
 BASE_OPTIONS="--build-tool $BUILD_TOOL --build-tool-version $BUILD_TOOL_VERSION --language $LANGUAGE --name $MEGA_APP_NAME --framework $FRAMEWORK --framework-version $FRAMEWORK_VERSION"
 

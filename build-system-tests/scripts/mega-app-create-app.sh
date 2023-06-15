@@ -65,9 +65,9 @@ if [[ -z "$MEGA_APP_NAME" ]]; then
     MEGA_APP_NAME="$FRAMEWORK-$FRAMEWORK_VERSION-$BUILD_TOOL-$BUILD_TOOL_VERSION-$LANGUAGE"
 fi
 
-###########################
-# Start Creating Mega App #
-###########################
+echo "###########################"
+echo "# Start Creating Mega App #"
+echo "###########################"
 
 # echo "cd build-system-tests"
 # cd build-system-tests
@@ -102,10 +102,8 @@ if [ "$BUILD_TOOL" == 'vite' ]; then
 fi
 
 if [[ "$FRAMEWORK" == 'angular' ]]; then
-    echo "npm install -g @angular/cli@${BUILD_TOOL_VERSION}"
-    npm install -g @angular/cli@${BUILD_TOOL_VERSION}
-    echo "ng new $MEGA_APP_NAME --interactive=false"
-    ng new $MEGA_APP_NAME --interactive=false
+    echo "npx  @angular/cli@${BUILD_TOOL_VERSION} new $MEGA_APP_NAME --interactive=false"
+    npx @angular/cli@${BUILD_TOOL_VERSION} new $MEGA_APP_NAME --interactive=false
 fi
 
 if [[ "$FRAMEWORK" == 'vue' ]]; then

@@ -65,9 +65,9 @@ if [[ -z "$MEGA_APP_NAME" ]]; then
     MEGA_APP_NAME="$FRAMEWORK-$FRAMEWORK_VERSION-$BUILD_TOOL-$BUILD_TOOL_VERSION-$LANGUAGE"
 fi
 
-#######################
-# Start Copying Files #
-#######################
+echo "#######################"
+echo "# Start Copying Files #"
+echo "#######################"
 
 if [[ "$FRAMEWORK" == "react-native" && "$BUILD_TOOL" == 'cli' ]]; then
     AWS_EXPORTS_FILE="templates/template-react-native-aws-exports.js"
@@ -129,15 +129,21 @@ if [[ "$FRAMEWORK" == 'react' && "$BUILD_TOOL" == 'vite' ]]; then
 fi
 
 if [[ "$FRAMEWORK" == 'angular' ]]; then
-    # The following change is to test build. If to work on the browser, we also need to change polyfills.
-    # See more: https://ui.docs.amplify.aws/angular/getting-started/troubleshooting
     echo "cp templates/components/angular/app.component.ts mega-apps/${MEGA_APP_NAME}/src/app/app.component.ts"
     cp templates/components/angular/app.component.ts mega-apps/${MEGA_APP_NAME}/src/app/app.component.ts
     echo "cp templates/components/angular/app.module.ts mega-apps/${MEGA_APP_NAME}/src/app/app.module.ts"
     cp templates/components/angular/app.module.ts mega-apps/${MEGA_APP_NAME}/src/app/app.module.ts
     cat templates/components/angular/style-appendix.css >>mega-apps/${MEGA_APP_NAME}/src/styles.css
+
+    # The following change is to test change polyfills so that the app works in browser in local.
+    # See more: https://ui.docs.amplify.aws/angular/getting-started/troubleshooting
     if [[ "$FRAMEWORK_VERSION" -gt 15 || "$FRAMEWORK_VERSION" == "latest" ]]; then
+        echo "cp templates/components/angular/polyfills-appendix.ts mega-apps/${MEGA_APP_NAME}/src/polyfills.ts"
         cat ./templates/components/angular/polifills-appendix.ts >>mega-apps/${MEGA_APP_NAME}/src/polyfills.ts
+        echo "jq --arg polyfills \"src/polyfills.ts\" --arg appName \"$MEGA_APP_NAME\" '.projects[\$appName].architect.build.options.polyfills += [\$polyfills]' mega-apps/${MEGA_APP_NAME}/angular.json | sponge mega-apps/${MEGA_APP_NAME}/angular.json"
+        jq --arg polyfills "src/polyfills.ts" --arg appName "$MEGA_APP_NAME" '.projects[$appName].architect.build.options.polyfills += [$polyfills]' mega-apps/${MEGA_APP_NAME}/angular.json | sponge mega-apps/${MEGA_APP_NAME}/angular.json
+        echo "sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | jq '.files |= . + [\"src/polyfills.ts\"]' | sponge mega-apps/${MEGA_APP_NAME}/tsconfig.app.json"
+        sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | jq '.files |= . + ["src/polyfills.ts"]' | sponge mega-apps/${MEGA_APP_NAME}/tsconfig.app.json
     fi
 fi
 
@@ -155,7 +161,7 @@ if [[ "$FRAMEWORK" == 'vue' ]]; then
 
     # Add `allowJs: true` to tsconfig for aws-exports.js
     echo "npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e \"this.compilerOptions.allowJs=true\""
-    npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e "this.compilerOptions.allowJs=true"
+    jq '.compilerOptions.allowJs = true' mega-apps/"${MEGA_APP_NAME}"/tsconfig.json | sponge mega-apps/"${MEGA_APP_NAME}"/tsconfig.json
 
     # See Troubleshooting: https://ui.docs.amplify.aws/vue/getting-started/troubleshooting
     if [[ "$BUILD_TOOL" == 'vite' ]]; then

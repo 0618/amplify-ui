@@ -77,9 +77,9 @@ if [[ -z "$MEGA_APP_NAME" ]]; then
     MEGA_APP_NAME="$FRAMEWORK-$FRAMEWORK_VERSION-$BUILD_TOOL-$BUILD_TOOL_VERSION-$LANGUAGE"
 fi
 
-##########################
-# Start Mega App Install #
-##########################
+echo "##########################"
+echo "# Start Mega App Install #"
+echo "##########################"
 
 DEPENDENCIES="$FRAMEWORK@$FRAMEWORK_VERSION @aws-amplify/ui-$FRAMEWORK aws-amplify"
 
