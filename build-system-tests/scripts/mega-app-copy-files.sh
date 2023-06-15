@@ -137,11 +137,14 @@ if [[ "$FRAMEWORK" == 'angular' ]]; then
 
     # The following change is to test change polyfills so that the app works in browser in local.
     # See more: https://ui.docs.amplify.aws/angular/getting-started/troubleshooting
+    echo "Change polyfills.ts"
+    echo "cp templates/components/angular/polyfills-appendix.ts mega-apps/${MEGA_APP_NAME}/src/polyfills.ts"
+    cat ./templates/components/angular/polifills-appendix.ts >>mega-apps/${MEGA_APP_NAME}/src/polyfills.ts
     if [[ "$FRAMEWORK_VERSION" -gt 15 || "$FRAMEWORK_VERSION" == "latest" ]]; then
-        echo "cp templates/components/angular/polyfills-appendix.ts mega-apps/${MEGA_APP_NAME}/src/polyfills.ts"
-        cat ./templates/components/angular/polifills-appendix.ts >>mega-apps/${MEGA_APP_NAME}/src/polyfills.ts
+        echo "add polyfills to angular.json"
         echo "jq --arg polyfills \"src/polyfills.ts\" --arg appName \"$MEGA_APP_NAME\" '.projects[\$appName].architect.build.options.polyfills += [\$polyfills]' mega-apps/${MEGA_APP_NAME}/angular.json | sponge mega-apps/${MEGA_APP_NAME}/angular.json"
         jq --arg polyfills "src/polyfills.ts" --arg appName "$MEGA_APP_NAME" '.projects[$appName].architect.build.options.polyfills += [$polyfills]' mega-apps/${MEGA_APP_NAME}/angular.json | sponge mega-apps/${MEGA_APP_NAME}/angular.json
+        echo "strip comments from tsconfig.app.json and add polyfills.ts"
         echo "sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | jq '.files |= . + [\"src/polyfills.ts\"]' | sponge mega-apps/${MEGA_APP_NAME}/tsconfig.app.json"
         sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | jq '.files |= . + ["src/polyfills.ts"]' | sponge mega-apps/${MEGA_APP_NAME}/tsconfig.app.json
     fi
