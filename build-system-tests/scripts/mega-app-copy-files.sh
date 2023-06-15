@@ -135,6 +135,10 @@ if [[ "$FRAMEWORK" == 'angular' ]]; then
     cp templates/components/angular/app.component.ts mega-apps/${MEGA_APP_NAME}/src/app/app.component.ts
     echo "cp templates/components/angular/app.module.ts mega-apps/${MEGA_APP_NAME}/src/app/app.module.ts"
     cp templates/components/angular/app.module.ts mega-apps/${MEGA_APP_NAME}/src/app/app.module.ts
+    cat templates/components/angular/style-appendix.css >>mega-apps/${MEGA_APP_NAME}/src/styles.css
+    if [[ "$FRAMEWORK_VERSION" -gt 15 || "$FRAMEWORK_VERSION" == "latest" ]]; then
+        cat ./templates/components/angular/polifills-appendix.ts >>mega-apps/${MEGA_APP_NAME}/src/polyfills.ts
+    fi
 fi
 
 if [[ "$FRAMEWORK" == 'vue' ]]; then

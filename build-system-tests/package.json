@@ -8,12 +8,14 @@
   },
   "scripts": {
     "setup:react": "./scripts/setup-mega-app.sh",
+    "setup:angular": "./scripts/setup-mega-app.sh -F angular",
     "react-latest-cra-latest-ts": "npm run setup:react",
     "react-latest-next-latest-ts": "npm run setup:react -- -B next",
     "react-latest-vite-latest-ts": "npm run setup:react -- -B vite",
     "react-16-cra-latest-ts": "npm run setup:react -- -f 16",
     "react-latest-cra-latest-js": "npm run setup:react -- -l js",
     "react-17-next-11-ts": "npm run setup:react -- -f 17 -B next -b 11",
-    "react-latest-vite-2-ts": "npm run setup:react -- -B vite -b 2"
+    "react-latest-vite-2-ts": "npm run setup:react -- -B vite -b 2",
+    "angular-latest-angular-cli-latest-ts": "npm run setup:angular -- -B angular-cli"
   }
 }
