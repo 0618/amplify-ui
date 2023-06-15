@@ -75,8 +75,6 @@ else
     AWS_EXPORTS_FILE="templates/template-aws-exports.js"
 fi
 
-npm install
-
 if [ "$BUILD_TOOL" == 'cra' ]; then
     echo "cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/src/aws-exports.js"
     cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/src/aws-exports.js
@@ -156,15 +154,10 @@ if [[ "$FRAMEWORK" == 'vue' ]]; then
     echo "cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/src/aws-exports.js"
     cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/src/aws-exports.js
 
-    # remove comments from JSON files because `json` package can't process comments
-    echo "mv mega-apps/${MEGA_APP_NAME}/tsconfig.json mega-apps/${MEGA_APP_NAME}/tsconfig-original.json"
-    mv mega-apps/${MEGA_APP_NAME}/tsconfig.json mega-apps/${MEGA_APP_NAME}/tsconfig-original.json
-    echo "npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig-original.json >mega-apps/${MEGA_APP_NAME}/tsconfig.json"
-    npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig-original.json >mega-apps/${MEGA_APP_NAME}/tsconfig.json
-
     # Add `allowJs: true` to tsconfig for aws-exports.js
-    echo "npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e \"this.compilerOptions.allowJs=true\""
-    jq '.compilerOptions.allowJs = true' mega-apps/"${MEGA_APP_NAME}"/tsconfig.json | sponge mega-apps/"${MEGA_APP_NAME}"/tsconfig.json
+    echo "strip comments from tsconfig.json and add allowJs: true"
+    echo "sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.json | jq '.compilerOptions.allowJs = true' mega-apps/${MEGA_APP_NAME}/tsconfig.json | sponge mega-apps/${MEGA_APP_NAME}/tsconfig.json"
+    sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.json | jq '.compilerOptions.allowJs = true' mega-apps/"${MEGA_APP_NAME}"/tsconfig.json | sponge mega-apps/"${MEGA_APP_NAME}"/tsconfig.json
 
     # See Troubleshooting: https://ui.docs.amplify.aws/vue/getting-started/troubleshooting
     if [[ "$BUILD_TOOL" == 'vite' ]]; then

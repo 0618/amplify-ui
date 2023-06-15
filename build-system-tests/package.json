@@ -9,6 +9,7 @@
   "scripts": {
     "setup:react": "./scripts/setup-mega-app.sh",
     "setup:angular": "./scripts/setup-mega-app.sh -F angular",
+    "setup:vue": "./scripts/setup-mega-app.sh -F vue",
     "react-latest-cra-latest-ts": "npm run setup:react",
     "react-latest-next-latest-ts": "npm run setup:react -- -B next",
     "react-latest-vite-latest-ts": "npm run setup:react -- -B vite",
@@ -17,6 +18,7 @@
     "react-17-next-11-ts": "npm run setup:react -- -f 17 -B next -b 11",
     "react-latest-vite-2-ts": "npm run setup:react -- -B vite -b 2",
     "angular-latest-angular-cli-latest-ts": "npm run setup:angular -- -B angular-cli",
-    "angular-14-angular-cli-14-ts": "npm run setup:angular -- -f 14 -B angular-cli -b 14 -n angular-latest-angular-cli-v14-ts"
+    "angular-14-angular-cli-14-ts": "npm run setup:angular -- -f 14 -B angular-cli -b 14 -n angular-latest-angular-cli-v14-ts",
+    "vue-3-vue-cli-latest-ts": "npm run setup:vue -- -f 3 -B vue-cli"
   }
 }
