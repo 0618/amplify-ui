@@ -129,8 +129,9 @@ jobs:
         env:
           SEGMENT_DOWNLOAD_TIMEOUT_MINS: 2
       - name: Create MegaApp ${{ env.MEGA_APP_NAME }} and run build on NodeJS ${{ matrix.node-version }}
-        run: yarn build-system-tests ${{ env.MEGA_APP_NAME }}
+        run: npm run ${{ env.MEGA_APP_NAME }}
         shell: bash
+        working-directory: build-system-tests
 
   # log-failure-metric:
   #   # Send a failure data point to metric BuildSystemTestFailure in github-workflows@ us-east-2
