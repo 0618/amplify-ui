@@ -142,3 +142,7 @@ else
         npm install $DEPENDENCIES
     fi
 fi
+
+echo "Back to build-system-tests folder"
+echo "cd ../../"
+cd ../../

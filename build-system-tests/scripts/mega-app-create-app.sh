@@ -141,3 +141,7 @@ if [[ "$FRAMEWORK" == 'react-native' ]]; then
         npx expo-env-info
     fi
 fi
+
+echo "Back to build-system-tests folder"
+echo "cd .."
+cd ..
