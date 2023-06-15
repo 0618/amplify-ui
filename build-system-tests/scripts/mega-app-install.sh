@@ -140,13 +140,5 @@ else
     else
         echo "npm install $DEPENDENCIES"
         npm install $DEPENDENCIES
-
-        if [[ "$FRAMEWORK" == 'angular' ]]; then
-            # To prevent Expected identifier but found "=", unable to publish app https://github.com/aws-amplify/amplify-js/issues/11455
-            echo "rm -rf node_modules package-lock.json"
-            rm -rf node_modules package-lock.json
-            echo "npm install"
-            npm install
-        fi
     fi
 fi

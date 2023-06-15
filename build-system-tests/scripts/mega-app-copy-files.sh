@@ -144,11 +144,11 @@ if [[ "$FRAMEWORK" == 'angular' ]]; then
     cat ./templates/components/angular/polifills-appendix.ts >>mega-apps/${MEGA_APP_NAME}/src/polyfills.ts
     if [[ "$FRAMEWORK_VERSION" -gt 15 || "$FRAMEWORK_VERSION" == "latest" ]]; then
         echo "add polyfills to angular.json"
-        echo "jq --arg polyfills \"src/polyfills.ts\" --arg appName \"$MEGA_APP_NAME\" '.projects[\$appName].architect.build.options.polyfills += [\$polyfills]' mega-apps/${MEGA_APP_NAME}/angular.json | sponge mega-apps/${MEGA_APP_NAME}/angular.json"
-        jq --arg polyfills "src/polyfills.ts" --arg appName "$MEGA_APP_NAME" '.projects[$appName].architect.build.options.polyfills += [$polyfills]' mega-apps/${MEGA_APP_NAME}/angular.json | sponge mega-apps/${MEGA_APP_NAME}/angular.json
+        echo "npx json -I -f mega-apps/${MEGA_APP_NAME}/angular.json -e \"this.projects[\\\"$MEGA_APP_NAME\\\"].architect.build.options.polyfills.push(\\\"src/polyfills.ts\\\")\""
+        npx json -I -f mega-apps/${MEGA_APP_NAME}/angular.json -e "this.projects[\"$MEGA_APP_NAME\"].architect.build.options.polyfills.push(\"src/polyfills.ts\")"
         echo "strip comments from tsconfig.app.json and add polyfills.ts"
-        echo "sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | jq '.files |= . + [\"src/polyfills.ts\"]' | sponge mega-apps/${MEGA_APP_NAME}/tsconfig.app.json"
-        sed '/\/\/\|^\/\*/d' mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | jq '.files |= . + ["src/polyfills.ts"]' | sponge mega-apps/${MEGA_APP_NAME}/tsconfig.app.json
+        echo "npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | npx json -a -e 'this.files.push(\"src/polyfills.ts\")' >tsconfig.app.json.tmp && mv tsconfig.app.json.tmp ./mega-apps/$MEGA_APP_NAME/tsconfig.app.json && rm -f tsconfig.app.json.tmp"
+        npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig.app.json | npx json -a -e 'this.files.push("src/polyfills.ts")' >tsconfig.app.json.tmp && mv tsconfig.app.json.tmp ./mega-apps/$MEGA_APP_NAME/tsconfig.app.json && rm -f tsconfig.app.json.tmp
     fi
 fi
 
