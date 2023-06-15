@@ -75,6 +75,8 @@ else
     AWS_EXPORTS_FILE="templates/template-aws-exports.js"
 fi
 
+echo "Installing json and strip-json-comments"
+echo "npm install"
 npm install
 
 if [ "$BUILD_TOOL" == 'cra' ]; then
@@ -157,12 +159,8 @@ if [[ "$FRAMEWORK" == 'vue' ]]; then
     cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/src/aws-exports.js
 
     # remove comments from JSON files because `json` package can't process comments
-    echo "npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig.json >tmpfile && mv tmpfile mega-apps/${MEGA_APP_NAME}/tsconfig.json"
-    npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig.json >tmpfile && mv tmpfile mega-apps/${MEGA_APP_NAME}/tsconfig.json
-
-    # Add `allowJs: true` to tsconfig for aws-exports.js
-    echo "npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e \"this.compilerOptions.allowJs=true\""
-    npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e "this.compilerOptions.allowJs=true"
+    echo "npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig.json >tmpfile && mv tmpfile mega-apps/${MEGA_APP_NAME}/tsconfig.json && rm -f tmpfile"
+    npx strip-json-comments mega-apps/${MEGA_APP_NAME}/tsconfig.json >tmpfile && mv tmpfile mega-apps/${MEGA_APP_NAME}/tsconfig.json && rm -f tmpfile
 
     # See Troubleshooting: https://ui.docs.amplify.aws/vue/getting-started/troubleshooting
     if [[ "$BUILD_TOOL" == 'vite' ]]; then
@@ -175,6 +173,14 @@ if [[ "$FRAMEWORK" == 'vue' ]]; then
     if [[ "$BUILD_TOOL" == 'nuxt' ]]; then
         echo "cp templates/components/vue/nuxt/* mega-apps/${MEGA_APP_NAME}/"
         cp templates/components/vue/nuxt/* mega-apps/${MEGA_APP_NAME}/
+
+        echo "add allowJs: true to tsconfig for aws-exports.js"
+        echo "npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e \"this.allowJs=true\""
+        npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e "this.allowJs=true"
+    else
+        echo "add allowJs: true to tsconfig for aws-exports.js"
+        echo "npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e \"this.compilerOptions.allowJs=true\""
+        npx json -I -f mega-apps/${MEGA_APP_NAME}/tsconfig.json -e "this.compilerOptions.allowJs=true"
     fi
 fi
 
@@ -192,5 +198,3 @@ if [[ "$FRAMEWORK" == "react-native" ]]; then
         cp $AWS_EXPORTS_FILE mega-apps/${MEGA_APP_NAME}/aws-exports.js
     fi
 fi
-
-rm tmpfile
