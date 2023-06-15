@@ -89,8 +89,9 @@ if [ "$PKG_MANAGER" == 'yarn' ]; then
     yarn build
 else
     if [[ "$FRAMEWORK" == "react-native" ]]; then
-        echo "../../../.github/scripts/build-${PLATFORM}.sh $LOG_FILE $MEGA_APP_NAME $BUILD_TOOL"
-        ../../../.github/scripts/build-${PLATFORM}.sh $LOG_FILE $MEGA_APP_NAME $BUILD_TOOL
+        cd -
+        echo "./scripts/build-${PLATFORM}.sh $LOG_FILE $MEGA_APP_NAME $BUILD_TOOL"
+        ./scripts/build-${PLATFORM}.sh $LOG_FILE $MEGA_APP_NAME $BUILD_TOOL
     else
         echo "npm run build"
         npm run build
