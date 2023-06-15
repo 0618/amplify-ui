@@ -19,6 +19,7 @@
     "react-latest-vite-2-ts": "npm run setup:react -- -B vite -b 2",
     "angular-latest-angular-cli-latest-ts": "npm run setup:angular -- -B angular-cli",
     "angular-14-angular-cli-14-ts": "npm run setup:angular -- -f 14 -B angular-cli -b 14 -n angular-latest-angular-cli-v14-ts",
-    "vue-3-vue-cli-latest-ts": "npm run setup:vue -- -f 3 -B vue-cli"
+    "vue-3-vue-cli-latest-ts": "npm run setup:vue -- -f 3 -B vue-cli",
+    "vue-latest-vite-latest-ts": "npm run setup:vue -- -B vite"
   }
 }
