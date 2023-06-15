@@ -19,6 +19,10 @@ PLATFORM="android"
 
 while [[ $# -gt 0 ]]; do
   case $1 in
+  -A | --platform)
+    PLATFORM=$2
+    shift
+    ;;
   -B | --build-tool)
     BUILD_TOOL=$2
     shift
@@ -54,6 +58,7 @@ while [[ $# -gt 0 ]]; do
   -h | --help)
     echo "Usage: mega-app-create-app.sh [OPTIONS]"
     echo "Options:"
+    echo "  -A, --platform              Specify the platform: android, ios (default: android)"
     echo "  -B, --build-tool            Specify the build tool: cra, next, vite, angular-cli, vue-cli, nuxt, react-native-cli, expo. (default: cra)"
     echo "  -b, --build-tool-version    Specify the build tool version (default: latest)"
     echo "  -l, --language              Specify the language: js, ts (default: js)"
